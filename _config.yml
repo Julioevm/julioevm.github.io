@@ -8,7 +8,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 #
-# If you need help with YAML syntax, here are some quick references for you: 
+# If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 #
@@ -19,18 +19,65 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Code et cetera
-email: your-email@example.com
+subtitle: Software development, quality and delivery.
+email: julioevm@gmail.com
+# Name of your site (displayed in the header)
+name: Code et cetera
 description: >- # this means to ignore newlines until "baseurl:"
-  I write about programming, testing, automation and open source.
+  A blog about software, quality, open source and anything else that comes to mind.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: Coopykins
-github_username:  julioevm
+url: "https://julioevm.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+repository: Julioevm/julioevm.github.io
+twitter_username: Coopykins 
+github_username: julioevm 
 
 # Build settings
-theme: jekyll-theme-minimal
+remote_theme: "mmistakes/minimal-mistakes@4.18.1"
 plugins:
   - jekyll-feed
+  - jekyll-include-cache
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      read_time: true
+      author_profile: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+search: true
+
+author:
+  name: "Julio Valls"
+  avatar: "/images/julio.jpg"
+  bio: "Software Engineer in Test"
+  # email: "julioevm@gmail.com"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/Julioevm"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/julioevm/"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/coopykins"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: mailto:julioevm@gmail.com
+
+include: ["_pages"]
+
+kramdown:
+  parse_block_html: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.

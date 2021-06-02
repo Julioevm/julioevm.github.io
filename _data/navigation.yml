@@ -1,0 +1,7 @@
+main:
+  - title: "Blog"
+    url: /
+  - title: "Software Quality"
+    url: /software-quality/
+  - title: "About me"
+    url: /about/
