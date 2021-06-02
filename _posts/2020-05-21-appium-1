@@ -1,0 +1,17 @@
+---
+layout: posts
+title: "Appium Tip #1 Forcing the retrieval of UI hierarchy on iOS"
+excerpt: "If appium can't retrieve the element hierarchy on an iOS app for whatever reason, try one of these methods:"
+date: 2020-5-21 09:00:00 -0500
+category: [automation, appium, ios]
+---
+
+If appium can't retrieve the element hierarchy on an iOS app for whatever reason, try one of these methods:
+
+```
+driver.executeScript("mobile: source", ImmutableMap.of("format", "description"));
+
+driver.executeScript("mobile: source", ImmutableMap.of("format", "json"));
+```
+
+On your test code, this will return the source, although it mmight not be as neatly formated as the usual getSource(), sometimes that method doesn't retrieve every element. This can be an useful workaround.

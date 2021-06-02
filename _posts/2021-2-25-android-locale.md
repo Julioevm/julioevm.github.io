@@ -3,6 +3,7 @@ layout: posts
 title: "Changing Android 10 or higher device Locale programatically"
 excerpt: "While testing your app, its common that you want to test it under different locales as part of your automation strategy. Lets see how to do it."
 date: 2021-2-25 09:00:00 -0500
+category: [automation, appium, android]
 ---
 
 

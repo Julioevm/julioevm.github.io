@@ -3,6 +3,7 @@ layout: posts
 title: "Game related youtube channels"
 excerpt: "For a month and two weeks now, I've been having less and less time to do much beside changing diapers. If I can squeeze a bit of time into my hobbies, I have to split it between learning / coding projects and other hobbies."
 date: 2020-03-16 09:00:00 -0500
+category: [games, youtube]
 ---
 
 For a month and two weeks now, I've been having less and less time to do much beside changing diapers. If I can squeeze a bit of time into my hobbies, I have to split it between learning / coding projects and other hobbies.

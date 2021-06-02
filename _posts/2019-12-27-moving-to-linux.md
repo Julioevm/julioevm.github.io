@@ -3,6 +3,7 @@ layout: posts
 title: "Moving to linux at work"
 excerpt: "So I've been using Linux here and there for many many years, but never used it as a daily driver. On my current work, we use Linux machines a lot, both physical and cloud servers, etc so I thought it would be a great idea to make the move on my work machine."
 date: 2019-12-27 09:00:00 -0500
+category: [linux, oss]
 ---
 
 <div style="text-align:center;width:100%;">
