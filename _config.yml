@@ -43,6 +43,7 @@ defaults:
       path: ""
       type: posts
     values:
+      layout: simple
       read_time: true
       author_profile: true
       related: true
