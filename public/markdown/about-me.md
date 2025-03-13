@@ -1,32 +1,29 @@
-# About Me
+# Hey there! 👋
 
-## Biography
+I'm Julio, a tech enthusiast who's been in the industry for over 9 years now. My journey's taken me from helping folks with tech support to testing products, and these days I'm all about development.
 
-Hey there! I am a PhD student at the [Computer Science and Engineering](https://www.eecs.psu.edu/) department of [Pennsylvania State University](https://www.psu.edu/). Previously, I received my master's degree in [Computer Science](https://www.bu.edu/cs/) from [Boston University](https://www.bu.edu/) and my bachelor’s degree in [Software Engineering](http://sse.tongji.edu.cn/) from [Tongji University](https://www.tongji.edu.cn/).
+## What I'm About
 
-I'm trying to find a balance between research and engineering.
+Tech (especially software development) is my jam! I'm constantly tinkering with new tools and approaches because, well, learning new stuff is fun.
 
-My current research interests primarily focus on understanding and enhancing the continuity, generalizability, efficiency, and other key properties of machine learning. I am also interested in large multimodal models.
+My big thing is creating experiences that users actually enjoy. I firmly believe that:
 
-I'm also learning web development and building machine learning software and systems.
+Simpler is almost always better
+The end user should be at the center of everything we build
+It's better to ship something good and improve it than to chase perfection forever
+Measuring results > adding complexity
+When I'm not coding, you'll find me playing video games or reading (mostly sci-fi).
 
+Let's connect and build something awesome together!
 
 ## Contact
 
 Contact me by:
 
-- Email: [renovamenzxh@gmail.com](mailto:renovamenzxh@gmail.com)
-- Github: [@Renovamen](https://github.com/Renovamen)
-- [Google Scholar](https://scholar.google.com/citations?user=RuW6xgMAAAAJ)
-- Linkedin: [xiaohan-zou](https://www.linkedin.com/in/xiaohan-zou)
-- 知乎: [@西伯利亚大恶龙](https://www.zhihu.com/people/chao-neng-gui-su)
-- Personal Website: [zxh.me](https://zxh.me)
-
+- Email: [julioevm@gmail.com](mailto:julioevm@gmail.com)
+- Github: [@Julioevm](https://github.com/julioevm)
+- Linkedin: [Julio Valls](https://www.linkedin.com/in/julioevm)
 
 ## Résumé
 
-- Normal version: [English](https://zxh.me/files/cv/en.pdf) / [中文](https://zxh.me/files/cv/cn.pdf)
-
-  中文版的更新很可能不及时
-
-- Interesting version: [portfolio.zxh.me](https://portfolio.zxh.me) / [resume.zxh.io](https://resume.zxh.io)
+- Resume: [juliovalls.netlify.app](https://juliovalls.netlify.app)

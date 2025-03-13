@@ -5,47 +5,28 @@ const websites: WebsitesData = {
     title: "SNS Links",
     sites: [
       {
-        id: "my-blog",
-        title: "Website",
-        img: "https://zxh.me/img/avatar.jpg",
-        link: "https://zxh.me/",
-        inner: true
-      },
-      {
         id: "my-github",
         title: "Github",
         img: "img/sites/github.svg",
-        link: "https://github.com/Renovamen"
+        link: "https://github.com/julioevm"
       },
       {
         id: "my-linkedin",
         title: "Linkedin",
         img: "img/sites/linkedin.svg",
-        link: "https://www.linkedin.com/in/xiaohan-zou"
-      },
-      {
-        id: "my-google-scholar",
-        title: "Scholar",
-        img: "img/sites/google-scholar.svg",
-        link: "https://scholar.google.com/citations?user=RuW6xgMAAAAJ"
-      },
-      {
-        id: "my-zhihu",
-        title: "知乎",
-        img: "img/sites/zhihu.jpeg",
-        link: "https://www.zhihu.com/people/chao-neng-gui-su"
+        link: "https://www.linkedin.com/in/julioevm"
       },
       {
         id: "my-twitter",
-        title: "Twitter",
+        title: "X",
         img: "img/sites/twitter.svg",
-        link: "https://www.twitter.com/renovamen_zxh"
+        link: "https://www.x.com/coopykins"
       },
       {
         id: "my-email",
         title: "Email",
         img: "img/sites/gmail.svg",
-        link: "mailto:renovamenzxh@gmail.com"
+        link: "mailto:julioevmh@gmail.com"
       }
     ]
   },
@@ -65,46 +46,16 @@ const websites: WebsitesData = {
         link: "https://arxiv.org/"
       },
       {
-        id: "twitter",
-        title: "Twitter",
+        id: "x",
+        title: "X",
         img: "img/sites/twitter.svg",
-        link: "https://www.twitter.com/"
+        link: "https://www.x.com/"
       },
       {
         id: "dribbble",
         title: "Dribbble",
         img: "img/sites/dribbble.svg",
         link: "https://dribbble.com/"
-      },
-      {
-        id: "pinterest",
-        title: "Pinterest",
-        img: "img/sites/pinterest.svg",
-        link: "https://www.pinterest.com/"
-      },
-      {
-        id: "art-station",
-        title: "ArtStation",
-        img: "img/sites/artstation.svg",
-        link: "https://www.artstation.com//"
-      },
-      {
-        id: "bilibili",
-        title: "Bilibili",
-        img: "img/sites/bilibili.svg",
-        link: "https://www.bilibili.com/"
-      },
-      {
-        id: "zhihu",
-        title: "知乎",
-        img: "img/sites/zhihu.jpeg",
-        link: "https://www.zhihu.com/"
-      },
-      {
-        id: "leetcode",
-        title: "LeetCode",
-        img: "img/sites/leetcode.svg",
-        link: "https://leetcode.com/"
       },
       {
         id: "reddit",
@@ -117,25 +68,6 @@ const websites: WebsitesData = {
         title: "Hacker News",
         img: "img/sites/hacker.svg",
         link: "https://news.ycombinator.com/"
-      },
-      {
-        id: "v2ex",
-        title: "V2EX",
-        img: "https://www.v2ex.com/apple-touch-icon.png",
-        link: "https://www.v2ex.com/"
-      },
-      {
-        id: "aideadline",
-        title: "AI Deadlines",
-        img: "https://aideadlin.es/static/img/favicon.png",
-        link: "https://aideadlin.es/",
-        inner: true
-      },
-      {
-        id: "oh-my-cv",
-        title: "OhMyCV",
-        img: "https://ohmycv.app/apple-touch-icon.png",
-        link: "https://ohmycv.app/"
       },
       {
         id: "steam",
