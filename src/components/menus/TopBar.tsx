@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { isFullScreen } from "~/utils";
 import { music } from "~/configs";
 import type { MacActions } from "~/types";
+import { StoreSlice } from "~/stores";
 
 interface TopBarItemProps {
   hideOnMobile?: boolean;
@@ -73,42 +74,46 @@ const TopBar = (props: TopBarProps) => {
     date: new Date(),
     showControlCenter: false,
     showWifiMenu: false,
-    showAppleMenu: false
+    showAppleMenu: false,
   });
 
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [audio, audioState, controls, audioRef] = useAudio({
     src: music.audio,
-    autoReplay: true
+    autoReplay: true,
   });
   const { winWidth, winHeight } = useWindowSize();
 
-  const { volume, wifi } = useStore((state) => ({
+  const { volume, wifi } = useStore((state: StoreSlice) => ({
     volume: state.volume,
-    wifi: state.wifi
+    wifi: state.wifi,
   }));
-  const { toggleFullScreen, setVolume, setBrightness } = useStore((state) => ({
-    toggleFullScreen: state.toggleFullScreen,
-    setVolume: state.setVolume,
-    setBrightness: state.setBrightness
-  }));
+  const { toggleFullScreen, setVolume, setBrightness } = useStore(
+    (state: StoreSlice) => ({
+      toggleFullScreen: state.toggleFullScreen,
+      setVolume: state.setVolume,
+      setBrightness: state.setBrightness,
+    })
+  );
 
   useInterval(() => {
     setState({
       ...state,
-      date: new Date()
+      date: new Date(),
     });
   }, 60 * 1000);
 
   useEffect(() => {
     props.setSpotlightBtnRef(spotlightBtnRef);
     controls.volume(volume / 100);
-  }, []);
+  }, [volume, controls, props]);
 
   useEffect(() => {
     const isFull = isFullScreen();
-    toggleFullScreen(isFull);
-  }, [winWidth, winHeight]);
+    if (useStore.getState().fullscreen !== isFull) {
+      toggleFullScreen(isFull);
+    }
+  }, [winWidth, winHeight, toggleFullScreen]);
 
   const setAudioVolume = (value: number): void => {
     setVolume(value);
@@ -122,21 +127,21 @@ const TopBar = (props: TopBarProps) => {
   const toggleControlCenter = (): void => {
     setState({
       ...state,
-      showControlCenter: !state.showControlCenter
+      showControlCenter: !state.showControlCenter,
     });
   };
 
   const toggleAppleMenu = (): void => {
     setState({
       ...state,
-      showAppleMenu: !state.showAppleMenu
+      showAppleMenu: !state.showAppleMenu,
     });
   };
 
   const toggleWifiMenu = (): void => {
     setState({
       ...state,
-      showWifiMenu: !state.showWifiMenu
+      showWifiMenu: !state.showWifiMenu,
     });
   };
 

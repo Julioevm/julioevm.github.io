@@ -33,7 +33,7 @@ export default function Desktop(props: MacActions) {
     showLaunchpad: false,
     currentTitle: "Finder",
     hideDockAndTopbar: false,
-    spotlight: false
+    spotlight: false,
   } as DesktopState);
 
   const [spotlightBtnRef, setSpotlightBtnRef] =
@@ -41,7 +41,7 @@ export default function Desktop(props: MacActions) {
 
   const { dark, brightness } = useStore((state) => ({
     dark: state.dark,
-    brightness: state.brightness
+    brightness: state.brightness,
   }));
 
   const getAppsData = (): void => {
@@ -53,19 +53,19 @@ export default function Desktop(props: MacActions) {
     apps.forEach((app) => {
       showApps = {
         ...showApps,
-        [app.id]: !!app.show
+        [app.id]: !!app.show,
       };
       appsZ = {
         ...appsZ,
-        [app.id]: 2
+        [app.id]: 2,
       };
       maxApps = {
         ...maxApps,
-        [app.id]: false
+        [app.id]: false,
       };
       minApps = {
         ...minApps,
-        [app.id]: false
+        [app.id]: false,
       };
     });
 
@@ -115,7 +115,7 @@ export default function Desktop(props: MacActions) {
     setState({
       ...state,
       maxApps: maxApps,
-      hideDockAndTopbar: target
+      hideDockAndTopbar: target,
     });
   };
 
@@ -125,7 +125,7 @@ export default function Desktop(props: MacActions) {
     minApps[id] = target;
     setState({
       ...state,
-      minApps: minApps
+      minApps: minApps,
     });
   };
 
@@ -157,7 +157,7 @@ export default function Desktop(props: MacActions) {
     setState({
       ...state,
       showApps: showApps,
-      hideDockAndTopbar: false
+      hideDockAndTopbar: false,
     });
   };
 
@@ -184,7 +184,7 @@ export default function Desktop(props: MacActions) {
       showApps: showApps,
       appsZ: appsZ,
       maxZ: maxZ,
-      currentTitle: currentApp.title
+      currentTitle: currentApp.title,
     });
 
     const minApps = state.minApps;
@@ -221,7 +221,7 @@ export default function Desktop(props: MacActions) {
           close: closeApp,
           setMax: setAppMax,
           setMin: minimizeApp,
-          focus: openApp
+          focus: openApp,
         };
 
         return (
@@ -240,7 +240,7 @@ export default function Desktop(props: MacActions) {
       className="size-full overflow-hidden bg-cover bg-center"
       style={{
         backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`,
-        filter: `brightness( ${(brightness as number) * 0.7 + 50}% )`
+        filter: `brightness( ${brightness * 0.7 + 50}% )`,
       }}
     >
       {/* Top Menu Bar */}

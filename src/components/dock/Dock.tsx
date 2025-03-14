@@ -1,5 +1,6 @@
 import { useMotionValue } from "framer-motion";
 import { apps } from "~/configs";
+import { StoreSlice } from "~/stores";
 
 interface DockProps {
   open: (id: string) => void;
@@ -16,11 +17,11 @@ export default function Dock({
   showApps,
   showLaunchpad,
   toggleLaunchpad,
-  hide
-}: DockProps) {
-  const { dockSize, dockMag } = useStore((state) => ({
+  hide,
+}: Readonly<DockProps>) {
+  const { dockSize, dockMag } = useStore((state: StoreSlice) => ({
     dockSize: state.dockSize,
-    dockMag: state.dockMag
+    dockMag: state.dockMag,
   }));
 
   const openApp = (id: string) => {
@@ -35,7 +36,9 @@ export default function Dock({
 
   return (
     <div
-      className={`dock fixed inset-x-0 mx-auto bottom-1 ${hide ? "z-0" : "z-50"}`}
+      className={`dock fixed inset-x-0 mx-auto bottom-1 ${
+        hide ? "z-0" : "z-50"
+      }`}
       w="full sm:max"
       overflow="x-scroll sm:x-visible"
     >
@@ -45,7 +48,7 @@ export default function Dock({
         onMouseMove={(e) => mouseX.set(e.nativeEvent.x)}
         onMouseLeave={() => mouseX.set(null)}
         style={{
-          height: `${(dockSize + 15) / 16}rem`
+          height: `${(dockSize + 15) / 16}rem`,
         }}
       >
         {apps.map((app) => (
