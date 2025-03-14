@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function useInterval(callback: Function, delay?: number | null) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   const savedCallback = useRef<Function>(() => {});
 
   useEffect(() => {
