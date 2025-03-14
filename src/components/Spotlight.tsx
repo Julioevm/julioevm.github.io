@@ -5,7 +5,7 @@ import type { LaunchpadData, AppsData } from "~/types";
 
 const APPS: { [key: string]: (LaunchpadData | AppsData)[] } = {
   app: apps,
-  portfolio: launchpadApps
+  portfolio: launchpadApps,
 };
 
 const getRandom = (min: number, max: number) => {
@@ -32,7 +32,7 @@ export default function Spotlight({
   toggleSpotlight,
   openApp,
   toggleLaunchpad,
-  btnRef
+  btnRef,
 }: SpotlightProps) {
   const spotlightRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -85,7 +85,8 @@ export default function Spotlight({
     const text = searchText.toLowerCase();
     return APPS[type].filter(
       (item: LaunchpadData | AppsData) =>
-        item.title.toLowerCase().includes(text) || item.id.toLowerCase().includes(text)
+        item.title.toLowerCase().includes(text) ||
+        item.id.toLowerCase().includes(text)
     );
   };
 
@@ -144,7 +145,7 @@ export default function Spotlight({
 
     return {
       appList: typeAppList,
-      appIdList: typeAppIdList
+      appIdList: typeAppIdList,
     };
   };
 
@@ -182,7 +183,7 @@ export default function Spotlight({
   const setCurrentDetailsWithType = (app: any, type: string) =>
     setCurDetails({
       ...app,
-      type
+      type,
     });
 
   const updateCurrentDetails = () => {
@@ -192,9 +193,13 @@ export default function Spotlight({
     }
 
     const appId = appIdList[selectedIndex];
-    const element = document.querySelector(`#spotlight-${appId}`) as HTMLElement;
+    const element = document.querySelector(
+      `#spotlight-${appId}`
+    ) as HTMLElement;
     const type = element.dataset.appType as string;
-    const app = APPS[type].find((item: LaunchpadData | AppsData) => item.id === appId);
+    const app = APPS[type].find(
+      (item: LaunchpadData | AppsData) => item.id === appId
+    );
 
     setCurrentDetailsWithType(app, type);
   };
@@ -204,7 +209,9 @@ export default function Spotlight({
 
     // remove highlight
     const prevAppId = appIdList[prevIndex];
-    const prev = document.querySelector(`#spotlight-${prevAppId}`) as HTMLElement;
+    const prev = document.querySelector(
+      `#spotlight-${prevAppId}`
+    ) as HTMLElement;
     prev.className = prev.className
       .replace(textWhite, textBlack)
       .replace(textSelected, "bg-transparent");
@@ -264,7 +271,7 @@ export default function Spotlight({
         <input
           ref={inputRef}
           className={`col-start-2 col-span-7 ${
-            curDetails ? "sm:col-span-9" : "sm:col-span-10"
+            curDetails ? "sm:col-span-9" : "sm:col-start-2 sm:col-span-10"
           } bg-transparent no-outline px-1`}
           text="c-black xl sm:2xl"
           placeholder="Spotlight Search"
@@ -313,7 +320,9 @@ export default function Spotlight({
                   <div>Last opened</div>
                 </div>
                 <div className="flex-1 pl-2 text-c-black">
-                  <div>{curDetails.type === "app" ? "Application" : "Portfolio"}</div>
+                  <div>
+                    {curDetails.type === "app" ? "Application" : "Portfolio"}
+                  </div>
                   <div>{`${getRandom(0, 999)} G`}</div>
                   <div>{getRandomDate()}</div>
                   <div>{getRandomDate()}</div>
