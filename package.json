@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b main dist",
     "dev": "vite --host",
     "lint": "eslint .",
     "prepare": "husky",
