@@ -106,7 +106,7 @@ const TopBar = (props: TopBarProps) => {
   useEffect(() => {
     props.setSpotlightBtnRef(spotlightBtnRef);
     controls.volume(volume / 100);
-  }, [volume, controls, props]);
+  }, []);
 
   useEffect(() => {
     const isFull = isFullScreen();
