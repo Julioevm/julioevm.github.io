@@ -1,7 +1,7 @@
 {
   "name": "playground-macos",
   "private": true,
-  "homepage": "http://julioevm.github.io",
+  "homepage": "https://julioevm.github.io/",
   "type": "module",
   "scripts": {
     "build": "vite build",
