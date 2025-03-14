@@ -35,15 +35,15 @@ export default function Boot({ restart, sleep, setBooting }: BootProps) {
   };
 
   return (
-    <div className="size-full bg-black flex-center" onClick={handleClick}>
-      <div className="i-fa-brands:apple text-white -mt-4 size-20 sm:size-24" />
+    <div className="size-full flex-center bg-black" onClick={handleClick}>
+      <div className="i-fa-brands:apple size-20 text-white -mt-4 sm:size-24" />
       {loading && (
         <div
-          className="absolute top-1/2 inset-x-0 w-56 h-1 sm:h-1.5 bg-gray-500 rounded overflow-hidden"
+          className="absolute inset-x-0 top-1/2 h-1 w-56 overflow-hidden rounded bg-gray-500 sm:h-1.5"
           m="t-16 sm:t-24 x-auto"
         >
           <span
-            className="absolute top-0 bg-white h-full rounded-sm"
+            className="absolute top-0 h-full rounded-sm bg-white"
             style={{
               width: `${percent.toString()}%`
             }}

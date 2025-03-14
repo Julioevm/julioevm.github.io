@@ -20,7 +20,7 @@ export default function Battery() {
         <span className="i-bi:battery text-2xl" />
         <div className={`battery-level ${color()}`} style={{ width: `${width()}rem` }} />
         {batteryState.charging && (
-          <span className="i-bi:lightning-charge-fill absolute inset-0 m-auto -translate-x-0.5 text-xs" />
+          <span className="i-bi:lightning-charge-fill absolute inset-0 m-auto text-xs -translate-x-0.5" />
         )}
       </div>
     </div>

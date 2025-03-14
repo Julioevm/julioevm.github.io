@@ -28,7 +28,7 @@ const terminal: TerminalData[] = [
         title: "contact.txt",
         type: "file",
         content: (
-          <ul className="list-disc ml-6">
+          <ul className="ml-6 list-disc">
             <li>
               Email:{" "}
               <a
@@ -78,7 +78,7 @@ const terminal: TerminalData[] = [
           <span className="text-blue-400">sleeping</span>) <span>{"{"}</span>
         </div>
         <div>
-          <span className="text-blue-400 ml-9">money</span>
+          <span className="ml-9 text-blue-400">money</span>
           <span className="text-yellow-400">++</span>;
         </div>
         <div>

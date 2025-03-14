@@ -17,7 +17,7 @@ export default function WifiMenu({ toggleWifiMenu, btnRef }: WifiMenuProps) {
 
   return (
     <div
-      className="menu-box hstack justify-between h-11 w-80 max-w-full right-0 sm:right-2 px-2 py-0.5"
+      className="right-0 h-11 max-w-full w-80 hstack justify-between px-2 py-0.5 menu-box sm:right-2"
       ref={wifiRef}
     >
       <div className="px-2.5 font-medium">Wi-Fi</div>

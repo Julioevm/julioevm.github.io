@@ -134,7 +134,7 @@ export default function Spotlight({
           <div className="w-8 flex-center">
             <img w-5 src={app.img} alt={app.title} title={app.title} />
           </div>
-          <div className="flex-1 hstack overflow-hidden whitespace-nowrap">
+          <div className="hstack flex-1 overflow-hidden whitespace-nowrap">
             {app.title}
           </div>
         </li>
@@ -166,7 +166,7 @@ export default function Spotlight({
         )}
         {portfolio.appList.length !== 0 && (
           <div>
-            <div className="spotlight-type mt-1.5 before:(content-empty absolute left-0 top-0 ml-2 w-63.5 border-t border-menu)">
+            <div className="spotlight-type mt-1.5 before:(border-menu absolute left-0 top-0 ml-2 w-63.5 border-t content-empty)">
               Portfolio
             </div>
             <ul className="w-full text-xs">{portfolio.appList}</ul>
@@ -255,11 +255,11 @@ export default function Spotlight({
       ref={spotlightRef}
     >
       <div
-        className="w-full h-12 sm:h-14 rounded-lg bg-transparent"
+        className="h-12 w-full rounded-lg bg-transparent sm:h-14"
         grid="~ cols-8 sm:cols-11"
       >
-        <div className="col-start-1 col-span-1 flex-center">
-          <span className="i-bx:search ml-1 text-c-600 text-[28px]" />
+        <div className="col-span-1 col-start-1 flex-center">
+          <span className="i-bx:search ml-1 text-[28px] text-c-600" />
         </div>
         <input
           ref={inputRef}
@@ -273,7 +273,7 @@ export default function Spotlight({
           autoFocus={true}
         />
         {curDetails && (
-          <div className="hidden sm:flex col-start-11 col-span-1 flex-center">
+          <div className="col-span-1 col-start-11 hidden flex-center sm:flex">
             <img
               w-8
               src={curDetails.img}
@@ -289,8 +289,8 @@ export default function Spotlight({
             {appList}
           </div>
           {curDetails && (
-            <div className="flex-1 vstack">
-              <div className="w-4/5 h-56" flex="center col" border="b menu">
+            <div className="vstack flex-1">
+              <div className="h-56 w-4/5" flex="center col" border="b menu">
                 <img
                   w-32
                   src={curDetails.img}
@@ -304,7 +304,7 @@ export default function Spotlight({
                   {`Version: ${getRandom(0, 99)}.${getRandom(0, 999)}`}
                 </div>
               </div>
-              <div className="flex-1 hstack text-xs">
+              <div className="hstack flex-1 text-xs">
                 <div w="1/2" text="right c-500">
                   <div>Kind</div>
                   <div>Size</div>

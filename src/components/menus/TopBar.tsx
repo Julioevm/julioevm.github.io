@@ -176,7 +176,7 @@ const TopBar = (props: TopBarProps) => {
           <span className="i-ri:apple-fill text-base" />
         </TopBarItem>
         <TopBarItem
-          className="font-semibold px-2"
+          className="px-2 font-semibold"
           onMouseEnter={() => {
             if (state.showAppleMenu) toggleAppleMenu();
           }}

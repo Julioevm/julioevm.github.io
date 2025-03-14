@@ -26,13 +26,13 @@ const NavSection = ({ width, section, setGoURL }: NavSectionProps) => {
 
   return (
     <div className="mx-auto w-full max-w-screen-md" p="t-8 x-4">
-      <div className="font-medium ml-2" text="xl sm:2xl">
+      <div className="ml-2 font-medium" text="xl sm:2xl">
         {section.title}
       </div>
       <div className={`mt-3 grid grid-flow-row ${grid}`}>
         {section.sites.map((site: SiteData) => (
           <div key={`safari-nav-${site.id}`} className="h-28 flex flex-col">
-            <div className="size-16 mx-auto rounded-md overflow-hidden bg-white">
+            <div className="mx-auto size-16 overflow-hidden rounded-md bg-white">
               {site.img ? (
                 <img
                   src={site.img}
@@ -73,12 +73,12 @@ const NavPage = ({ width, setGoURL }: NavProps) => {
 
   return (
     <div
-      className="w-full safari-content overflow-y-scroll bg-center bg-cover text-c-black"
+      className="safari-content w-full overflow-y-scroll bg-cover bg-center text-c-black"
       style={{
         backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`
       }}
     >
-      <div className="w-full min-h-full pt-8 bg-c-100/80 backdrop-blur-2xl">
+      <div className="min-h-full w-full pt-8 backdrop-blur-2xl bg-c-100/80">
         {/* Favorites */}
         <NavSection section={websites.favorites} setGoURL={setGoURL} width={width} />
 
@@ -94,7 +94,7 @@ const NavPage = ({ width, setGoURL }: NavProps) => {
             className={`h-16 w-full mt-4 grid ${grid} shadow-md rounded-xl text-sm`}
             bg="gray-50/70 dark:gray-600/50"
           >
-            <div className="col-start-1 col-span-1 flex-center space-x-2">
+            <div className="col-span-1 col-start-1 flex-center space-x-2">
               <span className="i-fa-solid:shield-alt text-2xl" />
               <span className="text-xl">{numTracker}</span>
             </div>
@@ -114,12 +114,12 @@ const NoInternetPage = () => {
 
   return (
     <div
-      className="w-full safari-content bg-blue-50 overflow-y-scroll bg-center bg-cover"
+      className="safari-content w-full overflow-y-scroll bg-blue-50 bg-cover bg-center"
       style={{
         backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`
       }}
     >
-      <div className="w-full h-full pb-10 backdrop-blur-2xl flex-center text-c-600 bg-c-100/80">
+      <div className="h-full w-full flex-center pb-10 backdrop-blur-2xl bg-c-100/80 text-c-600">
         <div className="text-center">
           <div className="text-2xl font-bold">You Are Not Connected to the Internet</div>
           <div className="pt-4 text-sm">
@@ -164,7 +164,7 @@ const Safari = ({ width }: SafariProps) => {
   const hideLast = (width as number) < 640 ? "hidden" : "flex";
 
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       {/* browser topbar */}
       <div className={`h-10 grid ${grid} items-center bg-c-white`}>
         <div className="flex px-2">
@@ -174,15 +174,15 @@ const Safari = ({ width }: SafariProps) => {
           >
             <span className="i-jam:chevron-left text-xl" />
           </button>
-          <button className="safari-btn w-7 text-c-400">
+          <button className="w-7 safari-btn text-c-400">
             <span className="i-jam:chevron-right text-xl" />
           </button>
-          <button className="safari-btn w-9 ml-3 text-c-700">
+          <button className="ml-3 w-9 safari-btn text-c-700">
             <span className="i-bi:layout-sidebar text-sm" />
           </button>
         </div>
-        <div className="hstack space-x-2 px-2">
-          <button className="safari-btn w-9 -ml-10 text-c-400">
+        <div className="hstack px-2 space-x-2">
+          <button className="w-9 -ml-10 safari-btn text-c-400">
             <span className="i-fa-solid:shield-alt text-sm" />
           </button>
           <input
@@ -190,7 +190,7 @@ const Safari = ({ width }: SafariProps) => {
             value={state.currentURL}
             onChange={(e) => setState({ ...state, currentURL: e.target.value })}
             onKeyPress={pressURL}
-            className="h-6 w-full p-2 rounded font-normal no-outline text-sm text-center text-c-500 bg-c-200"
+            className="h-6 w-full rounded p-2 text-center text-sm font-normal no-outline bg-c-200 text-c-500"
             border="2 transparent focus:blue-400 dark:focus:blue-500"
             placeholder="Search or enter website name"
           />
@@ -199,7 +199,7 @@ const Safari = ({ width }: SafariProps) => {
           <button className={`safari-btn w-9 ${buttonColor}`}>
             <span className="i-ion:share-outline" />
           </button>
-          <button className="safari-btn w-9 text-c-700">
+          <button className="w-9 safari-btn text-c-700">
             <span className="i-ion:copy-outline" />
           </button>
         </div>

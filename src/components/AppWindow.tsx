@@ -73,7 +73,7 @@ const TrafficLights = ({ id, close, aspectRatio, max, setMax, setMin }: TrafficP
   };
 
   return (
-    <div className="traffic-lights flex flex-row absolute left-0 space-x-2 pl-2 mt-1.5">
+    <div className="traffic-lights absolute left-0 mt-1.5 flex flex-row pl-2 space-x-2">
       <button
         className="window-btn bg-red-500 dark:bg-red-400"
         onClick={closeWindow}

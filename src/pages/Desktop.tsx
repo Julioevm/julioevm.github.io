@@ -77,7 +77,7 @@ export default function Desktop(props: MacActions) {
   }, []);
 
   const toggleLaunchpad = (target: boolean): void => {
-    const r = document.querySelector(`#launchpad`) as HTMLElement;
+    const r = document.querySelector("#launchpad") as HTMLElement;
     if (target) {
       r.style.transform = "scale(1)";
       r.style.transition = "ease-in 0.2s";
@@ -237,7 +237,7 @@ export default function Desktop(props: MacActions) {
 
   return (
     <div
-      className="size-full overflow-hidden bg-center bg-cover"
+      className="size-full overflow-hidden bg-cover bg-center"
       style={{
         backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`,
         filter: `brightness( ${(brightness as number) * 0.7 + 50}% )`
@@ -256,7 +256,7 @@ export default function Desktop(props: MacActions) {
       />
 
       {/* Desktop Apps */}
-      <div className="window-bound z-10 absolute" style={{ top: minMarginY }}>
+      <div className="window-bound absolute z-10" style={{ top: minMarginY }}>
         {renderAppWindows()}
       </div>
 

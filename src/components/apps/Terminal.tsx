@@ -75,7 +75,7 @@ const HowDare = ({ setRMRF }: { setRMRF: (value: boolean) => void }) => {
       onClick={() => setRMRF(false)}
     >
       <canvas ref={canvasRef}></canvas>
-      <div className="font-avenir absolute h-28 text-center space-y-4 m-auto inset-0">
+      <div className="font-avenir absolute inset-0 m-auto h-28 text-center space-y-4">
         <div text-4xl>{emoji}</div>
         <div text-3xl>HOW DARE YOU!</div>
         <div>Click to go back</div>
@@ -216,7 +216,7 @@ export default class Terminal extends React.Component<object, TerminalState> {
 
   help = () => {
     const help = (
-      <ul className="list-disc ml-6 pb-1.5">
+      <ul className="ml-6 list-disc pb-1.5">
         <li>
           <span text-red-400>cat {"<file>"}</span> - See the content of {"<file>"}
         </li>
@@ -348,7 +348,7 @@ export default class Terminal extends React.Component<object, TerminalState> {
         </div>
         <input
           id={`terminal-input-${id}`}
-          className="flex-1 px-1 text-white outline-none bg-transparent"
+          className="flex-1 bg-transparent px-1 text-white outline-none"
           onKeyDown={this.keyPress}
           autoFocus={true}
         />
@@ -369,7 +369,7 @@ export default class Terminal extends React.Component<object, TerminalState> {
   render() {
     return (
       <div
-        className="terminal font-terminal font-normal relative h-full bg-gray-800/90 overflow-y-scroll"
+        className="terminal font-terminal relative h-full overflow-y-scroll bg-gray-800/90 font-normal"
         text="white sm"
         onClick={() => this.focusOnInput(this.curInputTimes)}
       >

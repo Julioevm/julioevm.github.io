@@ -60,7 +60,7 @@ const Highlighter = (dark: boolean): any => {
 const Sidebar = ({ cur, setMidBar }: SidebarProps) => {
   return (
     <div text-white>
-      <div className="h-12 pr-3 hstack space-x-3 justify-end">
+      <div className="h-12 hstack justify-end pr-3 space-x-3">
         <span className="i-ic:baseline-cloud-off text-xl" />
         <span className="i-akar-icons:settings-vertical text-xl" />
       </div>
@@ -95,8 +95,8 @@ const Middlebar = ({ items, cur, setContent }: MiddlebarProps) => {
           } hover:(bg-white dark:bg-gray-900)`}
           onClick={() => setContent(item.id, item.file, index)}
         >
-          <div className="h-8 mt-3 hstack">
-            <div className="-mt-1 w-10 vstack text-c-500">
+          <div className="mt-3 h-8 hstack">
+            <div className="w-10 vstack -mt-1 text-c-500">
               <span className={item.icon} />
             </div>
             <span className="relative flex-1 font-bold" text="gray-900 dark:gray-100">
@@ -113,7 +113,7 @@ const Middlebar = ({ items, cur, setContent }: MiddlebarProps) => {
               )}
             </span>
           </div>
-          <div className="flex-1 ml-10" p="b-2 r-1" text="sm c-500" border="b c-300">
+          <div className="ml-10 flex-1" p="b-2 r-1" text="sm c-500" border="b c-300">
             {item.excerpt}
           </div>
         </li>
@@ -172,7 +172,7 @@ const Content = ({ contentID, contentURL }: ContentProps) => {
   }, [contentID, contentURL, fetchMarkdown]);
 
   return (
-    <div className="markdown w-2/3 mx-auto px-2 py-6 text-c-700">
+    <div className="markdown mx-auto w-2/3 px-2 py-6 text-c-700">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[
@@ -216,7 +216,7 @@ const Bear = () => {
   };
 
   return (
-    <div className="bear font-avenir flex h-full">
+    <div className="bear font-avenir h-full flex">
       <div className="w-44 overflow-auto bg-gray-700">
         <Sidebar cur={state.curSidebar} setMidBar={setMidBar} />
       </div>

@@ -30,7 +30,7 @@ const SidebarItem = ({ date, active }: SidebarItemProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="size-11 rounded-full bg-zinc-600 flex-center">
+      <div className="size-11 flex-center rounded-full bg-zinc-600">
         <span className="i-ph:link-bold" text="2xl white/80" />
       </div>
 
@@ -38,7 +38,7 @@ const SidebarItem = ({ date, active }: SidebarItemProps) => {
         <div className="font-medium leading-4" text="white sm">
           FaceTime Link
         </div>
-        <div className="hstack space-x-1 text-white/60">
+        <div className="hstack text-white/60 space-x-1">
           <span className="i-ion:videocam" />
           <span>FaceTime · {format(Number(date), "hh:mm:ss")}</span>
         </div>
@@ -62,10 +62,10 @@ const Sidebar = ({ state, onTake, onSave, onSelect }: SidebarProps) => {
   }));
 
   return (
-    <div className="absolute w-74 h-full z-1 left-0 top-0 flex flex-col bg-zinc-900/85 backdrop-blur-xl">
-      <div className="p-5 space-y-2.5 text-sm">
+    <div className="absolute left-0 top-0 z-1 h-full w-74 flex flex-col bg-zinc-900/85 backdrop-blur-xl">
+      <div className="p-5 text-sm space-y-2.5">
         <button
-          className="flex-center space-x-1 w-full py-1 text-white bg-green-700 rounded-md"
+          className="w-full flex-center rounded-md bg-green-700 py-1 text-white space-x-1"
           onClick={onTake}
         >
           <span className="i-ion:ios-videocam text-base" />
@@ -87,8 +87,8 @@ const Sidebar = ({ state, onTake, onSave, onSelect }: SidebarProps) => {
         </button>
       </div>
 
-      <div className="text-xs flex-1 overflow-y-scroll" p="t-5 b-2.5 x-2.5">
-        <div className="px-2.5 text-white/60 mb-2">Recent</div>
+      <div className="flex-1 overflow-y-scroll text-xs" p="t-5 b-2.5 x-2.5">
+        <div className="mb-2 px-2.5 text-white/60">Recent</div>
         {Object.keys(images)
           .reverse()
           .map((date) => (

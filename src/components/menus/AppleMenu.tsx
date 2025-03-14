@@ -22,7 +22,7 @@ export default function AppleMenu({
   useClickOutside(ref, toggleAppleMenu, [btnRef]);
 
   return (
-    <div className="menu-box left-2 w-56" ref={ref}>
+    <div className="left-2 w-56 menu-box" ref={ref}>
       <MenuItemGroup>
         <MenuItem>About This Mac</MenuItem>
       </MenuItemGroup>
