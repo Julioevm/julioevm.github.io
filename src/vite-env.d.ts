@@ -3,6 +3,6 @@
 import type { AttributifyAttributes } from "unocss/dist/preset-attributify";
 
 declare module "react" {
-  /* eslint-disable-next-line @typescript-eslint/no-empty-object-type */
+  /* eslint-disable-next-line */
   interface HTMLAttributes<T> extends AttributifyAttributes {}
 }

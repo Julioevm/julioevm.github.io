@@ -46,27 +46,6 @@ var GLOB_EXCLUDE = [
 // src/configs/ignores.ts
 var ignores = [{ ignores: GLOB_EXCLUDE }];
 
-// src/configs/javascript.ts
-import globals from "globals";
-var javascript = [
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.es2021,
-        ...globals.node
-      },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true
-        },
-        sourceType: "module"
-      },
-      sourceType: "module"
-    }
-  }
-];
-
 // src/plugins.ts
 import tseslint from "typescript-eslint";
 
@@ -157,8 +136,7 @@ var isInEditor = !!(
 var hasTypeScript = true;
 var hasReact = true;
 // src/presets.ts
-var presetJavaScript = [...ignores, ...javascript];
-var presetBasic = [...presetJavaScript, ...typescript];
+const presetBasic = [...typescript];
 function eslintConfig(config = [], { react: enableReact = hasReact } = {}) {
   const configs = [...presetBasic];
 
@@ -182,11 +160,9 @@ export {
   hasTypeScript,
   ignores,
   isInEditor,
-  javascript,
   pluginFormat,
   pluginReact,
   presetBasic,
-  presetJavaScript,
   react,
   eslintConfig,
   tseslint,
