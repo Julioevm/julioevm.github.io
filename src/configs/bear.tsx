@@ -36,8 +36,8 @@ const bear: BearData[] = [
     md: [
       {
         id: "tiny-scraper",
-        title: "Flint",
-        file: "https://raw.githubusercontent.com/Julioevm/tiny-scraper/main/README.md",
+        title: "Tiny Scraper",
+        file: "https://raw.githubusercontent.com/Julioevm/tiny-scraper/refs/heads/master/readme.md",
         icon: "i-ri:gamepad-line",
         excerpt: "A simple game cover scraper for Anbernic RGXX devices.",
         link: "https://github.com/Julioevm/tiny-scraper"
@@ -53,15 +53,15 @@ const bear: BearData[] = [
       {
         id: "scrum-poker",
         title: "Scrum Poker",
-        file: "https://raw.githubusercontent.com/Julioevm/scrum-poker/main/README.md",
+        file: "https://raw.githubusercontent.com/Julioevm/scrum-poker/refs/heads/master/README.md",
         icon: "i-ri:newspaper-fill",
         excerpt: "A scrum poker app.",
         link: "http://scrum-poker-nine.vercel.app/"
       },
       {
         id: "coten",
-        title: "Castle of the Eternal Night",
-        file: "https://raw.githubusercontent.com/Julioevm/coten/master/README.md",
+        title: "COTEN",
+        file: "https://raw.githubusercontent.com/Julioevm/coten/refs/heads/master/readme.md",
         icon: "i-ri:gamepad-line",
         excerpt: "A Roguelike made with Python.",
         link: "https://github.com/Julioevm/coten"
