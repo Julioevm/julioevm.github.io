@@ -67,10 +67,14 @@ const startMenuSections: StartMenuSection[] = [
   }
 ];
 
+const getSystemTheme = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
 export function Taskbar() {
   const navigate = useNavigate();
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [activeStartSectionId, setActiveStartSectionId] = useState<string | null>(null);
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(getSystemTheme);
   const startMenuRef = useRef<HTMLDivElement>(null);
   const windows = useDesktopStore((state) => state.windows);
   const activeWindowId = useDesktopStore((state) => state.activeWindowId);
@@ -106,6 +110,18 @@ export function Taskbar() {
     };
   }, [isStartOpen]);
 
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateSystemTheme = () => setSystemTheme(media.matches ? "dark" : "light");
+
+    updateSystemTheme();
+    media.addEventListener("change", updateSystemTheme);
+
+    return () => {
+      media.removeEventListener("change", updateSystemTheme);
+    };
+  }, []);
+
   const activate = (id: string, route: string) => {
     focusWindow(id);
     restoreWindow(id);
@@ -120,6 +136,7 @@ export function Taskbar() {
 
   const activeStartSection =
     startMenuSections.find((section) => section.id === activeStartSectionId) ?? null;
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
 
   const toggleStartMenu = () => {
     setIsStartOpen((open) => {
@@ -234,11 +251,11 @@ export function Taskbar() {
       <button
         className="taskbar__theme"
         type="button"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-        title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+        aria-label={resolvedTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+        title={resolvedTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
       >
-        <Icon name={theme === "dark" ? "sun" : "moon"} />
+        <Icon name={resolvedTheme === "dark" ? "sun" : "moon"} />
       </button>
     </nav>
   );

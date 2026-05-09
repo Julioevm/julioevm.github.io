@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type Theme = "light" | "dark" | "system";
+export type Theme = "light" | "dark" | "system";
 export type WindowKind =
   | "blog"
   | "blogIndex"
@@ -61,7 +61,7 @@ const defaultWindow = (window: WindowSeed, index: number, zIndex: number): Deskt
 export const useDesktopStore = create<DesktopState>()(
   persist(
     (set, get) => ({
-      theme: "light",
+      theme: "system",
       windows: [],
       activeWindowId: null,
       nextZIndex: 10,
