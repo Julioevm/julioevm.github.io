@@ -35,6 +35,16 @@ export const defaultWindows = {
     route: "/contact",
     width: 560,
     height: 420
+  },
+  resume: {
+    id: "resume",
+    kind: "resume",
+    title: "Resume",
+    route: "/resume",
+    width: 900,
+    height: 680,
+    x: 132,
+    y: 64
   }
 } satisfies Record<string, WindowSeed>;
 
@@ -103,6 +113,10 @@ export const getRouteWindow = (pathname: string): WindowSeed | null => {
     return defaultWindows.contact;
   }
 
+  if (pathname === "/resume") {
+    return defaultWindows.resume;
+  }
+
   const blogMatch = pathname.match(/^\/blog\/([^/]+)$/);
   if (blogMatch) {
     return getBlogWindow(blogMatch[1]);
@@ -126,6 +140,7 @@ export const featuredDesktopItems = [
   defaultWindows.projectIndex,
   defaultWindows.about,
   defaultWindows.contact,
+  defaultWindows.resume,
   ...blogPosts.slice(0, 2).flatMap((post) => {
     const window = getBlogWindow(post.slug);
     return window ? [window] : [];

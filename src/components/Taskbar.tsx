@@ -27,12 +27,14 @@ const documentItems = compactMenuItems([
   getMenuItem("project:os-portfolio"),
   getMenuItem("project:markdown-workbench")
 ]);
-const startMenuActions = compactMenuItems([getMenuItem("about"), getMenuItem("contact")]).map(
-  (item): StartMenuAction => ({
-    item,
-    icon: getWindowIcon(item.kind)
-  })
-);
+const startMenuActions = compactMenuItems([
+  getMenuItem("about"),
+  getMenuItem("contact"),
+  getMenuItem("resume")
+]).map((item): StartMenuAction => ({
+  item,
+  icon: getWindowIcon(item.kind)
+}));
 
 const startMenuSections: StartMenuSection[] = [
   {

@@ -23,7 +23,8 @@ const windowIconMap: Record<WindowKind, IconName> = {
   contact: "mail",
   game: "gamepad",
   project: "code",
-  projectIndex: "folderCode"
+  projectIndex: "folderCode",
+  resume: "app"
 };
 
 export const getWindowIcon = (kind: WindowKind) => windowIconMap[kind];

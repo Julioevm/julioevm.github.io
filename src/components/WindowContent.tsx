@@ -115,6 +115,19 @@ export function WindowContent({ window }: WindowContentProps) {
     );
   }
 
+  if (window.kind === "resume") {
+    return (
+      <div className="resume-window" aria-label="Julio Valls resume site">
+        <iframe
+          className="resume-window__frame"
+          title="Julio Valls resume site"
+          src="https://juliovalls.netlify.app/"
+          referrerPolicy="no-referrer"
+        />
+      </div>
+    );
+  }
+
   if (window.kind === "about") {
     return (
       <article className="plain-document">
@@ -135,14 +148,20 @@ export function WindowContent({ window }: WindowContentProps) {
     return (
       <article className="plain-document">
         <h1>Contact</h1>
-        <p>Open to frontend engineering, product UI, and systems-heavy web work.</p>
+        <p>
+          Julio Valls Martinez, Technical Lead based in Valencia, Spain. Open to technical
+          leadership, frontend engineering, product UI, and systems-heavy web work.
+        </p>
         <div className="contact-grid">
-          <a href="mailto:hello@example.com">hello@example.com</a>
-          <a href="https://github.com/reave" target="_blank" rel="noreferrer">
+          <a href="mailto:julioevm@gmail.com">julioevm@gmail.com</a>
+          <a href="https://github.com/Julioevm" target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/julioevm/" target="_blank" rel="noreferrer">
             LinkedIn
+          </a>
+          <a href="https://juliovalls.netlify.app/" target="_blank" rel="noreferrer">
+            Resume
           </a>
         </div>
       </article>

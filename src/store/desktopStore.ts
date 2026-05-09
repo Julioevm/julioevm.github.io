@@ -8,6 +8,7 @@ export type WindowKind =
   | "project"
   | "projectIndex"
   | "game"
+  | "resume"
   | "about"
   | "contact";
 
@@ -149,7 +150,7 @@ export const useDesktopStore = create<DesktopState>()(
     }),
     {
       name: "os-portfolio-desktop",
-      version: 1
+      version: 2
     }
   )
 );
