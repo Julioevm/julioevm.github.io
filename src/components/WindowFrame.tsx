@@ -128,6 +128,14 @@ export function WindowFrame({ window }: WindowFrameProps) {
     navigate("/");
   };
 
+  const stopControlPointerEvent = (event: React.PointerEvent) => {
+    event.stopPropagation();
+  };
+
+  const stopControlDoubleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+
   const style = window.isMaximized
     ? undefined
     : {
@@ -154,7 +162,7 @@ export function WindowFrame({ window }: WindowFrameProps) {
           <span className="window__dot" aria-hidden="true" />
           {window.title}
         </div>
-        <div className="window__controls">
+        <div className="window__controls" onPointerDown={stopControlPointerEvent} onDoubleClick={stopControlDoubleClick}>
           <button type="button" aria-label="Minimize" onClick={() => minimizeWindow(window.id)}>
             -
           </button>

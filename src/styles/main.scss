@@ -194,10 +194,11 @@ a {
   }
 
   &[data-maximized="true"] {
-    inset: 10px 10px calc(var(--taskbar-height) + 10px) 10px;
+    inset: 0 0 var(--taskbar-height);
     width: auto;
     height: auto;
     transform: none;
+    border-radius: 0;
   }
 }
 
