@@ -157,8 +157,11 @@ a {
   color: var(--accent);
   background: var(--surface-strong);
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
-  font-size: 0.8rem;
-  font-weight: 800;
+
+  svg {
+    width: 26px;
+    height: 26px;
+  }
 }
 
 .desktop-icon__label {
@@ -387,6 +390,10 @@ a {
 .taskbar__start,
 .taskbar__theme,
 .taskbar__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   height: 38px;
   border: 1px solid var(--border);
   border-radius: 7px;
@@ -416,6 +423,12 @@ a {
       outline: none;
     }
   }
+
+  svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+  }
 }
 
 .taskbar__start {
@@ -424,7 +437,9 @@ a {
 }
 
 .taskbar__theme {
-  min-width: 76px;
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
 }
 
 .taskbar__windows {
@@ -439,10 +454,14 @@ a {
   max-width: 190px;
   min-width: 112px;
   padding: 0 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   text-align: left;
+
+  span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   &[data-active="true"] {
     border-color: var(--accent);

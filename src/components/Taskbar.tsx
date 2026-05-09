@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { defaultWindows } from "../content/routes";
 import { useDesktopStore } from "../store/desktopStore";
+import { Icon, getWindowIcon } from "./Icon";
 
 export function Taskbar() {
   const navigate = useNavigate();
@@ -26,7 +27,8 @@ export function Taskbar() {
   return (
     <nav className="taskbar" aria-label="Desktop taskbar">
       <button className="taskbar__start" type="button" onClick={openLauncher}>
-        Start
+        <Icon name="app" />
+        <span>Start</span>
       </button>
       <div className="taskbar__windows" aria-label="Open windows">
         {windows.map((window) => (
@@ -38,7 +40,8 @@ export function Taskbar() {
             type="button"
             onClick={() => activate(window.id, window.route)}
           >
-            {window.title}
+            <Icon name={getWindowIcon(window.kind)} />
+            <span>{window.title}</span>
           </button>
         ))}
       </div>
@@ -46,9 +49,10 @@ export function Taskbar() {
         className="taskbar__theme"
         type="button"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        aria-label="Toggle theme"
+        aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+        title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
       >
-        {theme === "dark" ? "Light" : "Dark"}
+        <Icon name={theme === "dark" ? "sun" : "moon"} />
       </button>
     </nav>
   );
