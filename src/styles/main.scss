@@ -431,9 +431,99 @@ a {
   }
 }
 
+.taskbar__start-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
 .taskbar__start {
   min-width: 84px;
   font-weight: 800;
+}
+
+.start-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 2;
+  display: grid;
+  width: min(310px, calc(100vw - 24px));
+  max-height: min(430px, calc(100vh - var(--taskbar-height) - 24px));
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 94%, var(--surface-muted));
+  box-shadow: var(--shadow-active);
+  color: var(--text);
+  backdrop-filter: blur(18px);
+}
+
+.start-menu__rail {
+  display: none;
+
+  span {
+    display: none;
+  }
+}
+
+.start-menu__items {
+  min-width: 0;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.start-menu__item {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  min-height: 42px;
+  padding: 5px 10px 5px 6px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+  text-align: left;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 120ms var(--ease-out);
+
+  span:last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:focus-visible,
+  &:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(0.985);
+  }
+}
+
+.start-menu__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface-strong);
+  color: var(--accent);
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
 }
 
 .taskbar__theme {
@@ -656,6 +746,10 @@ a {
   .taskbar__start,
   .taskbar__theme {
     min-width: 62px;
+  }
+
+  .start-menu {
+    width: min(300px, calc(100vw - 16px));
   }
 
   .taskbar__item {
