@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 import { WindowContent } from "./WindowContent";
 import { useDesktopStore, type DesktopWindow } from "../store/desktopStore";
@@ -23,9 +23,15 @@ type WindowFrameProps = {
 const minWidth = 320;
 const minHeight = 240;
 
+type WindowStyle = CSSProperties & {
+  "--window-x"?: string;
+  "--window-y"?: string;
+};
+
 export function WindowFrame({ window }: WindowFrameProps) {
   const navigate = useNavigate();
   const drag = useRef<DragMode | null>(null);
+  const [isInteracting, setIsInteracting] = useState(false);
   const closeWindow = useDesktopStore((state) => state.closeWindow);
   const focusWindow = useDesktopStore((state) => state.focusWindow);
   const minimizeWindow = useDesktopStore((state) => state.minimizeWindow);
@@ -44,6 +50,7 @@ export function WindowFrame({ window }: WindowFrameProps) {
     }
 
     focusWindow(window.id);
+    setIsInteracting(true);
     drag.current = {
       type: "move",
       startX: event.clientX,
@@ -61,6 +68,7 @@ export function WindowFrame({ window }: WindowFrameProps) {
     }
 
     focusWindow(window.id);
+    setIsInteracting(true);
     drag.current = {
       type: "resize",
       edge,
@@ -118,6 +126,7 @@ export function WindowFrame({ window }: WindowFrameProps) {
 
   const endDrag = (event: React.PointerEvent) => {
     drag.current = null;
+    setIsInteracting(false);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -139,16 +148,18 @@ export function WindowFrame({ window }: WindowFrameProps) {
   const style = window.isMaximized
     ? undefined
     : {
-        transform: `translate(${window.x}px, ${window.y}px)`,
+        "--window-x": `${window.x}px`,
+        "--window-y": `${window.y}px`,
         width: window.width,
         height: window.height,
         zIndex: window.zIndex
-      };
+      } satisfies WindowStyle;
 
   return (
     <article
       className="window"
       data-active={activeWindowId === window.id}
+      data-interacting={isInteracting}
       data-maximized={window.isMaximized}
       style={window.isMaximized ? { zIndex: window.zIndex } : style}
       onPointerDown={() => focusWindow(window.id)}

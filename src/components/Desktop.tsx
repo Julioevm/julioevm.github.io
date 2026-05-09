@@ -9,7 +9,6 @@ export function Desktop() {
   const navigate = useNavigate();
   const windows = useDesktopStore((state) => state.windows);
   const openWindow = useDesktopStore((state) => state.openWindow);
-  const theme = useDesktopStore((state) => state.theme);
 
   const handleOpen = (item: (typeof featuredDesktopItems)[number]) => {
     openWindow(item);
@@ -29,10 +28,6 @@ export function Desktop() {
           <WindowFrame key={window.id} window={window} />
         ))}
       </section>
-      <div className="desktop__status" aria-live="polite">
-        <span>OS Portfolio</span>
-        <span>{theme === "dark" ? "Dark" : "Light"} mode</span>
-      </div>
       <Taskbar />
     </main>
   );

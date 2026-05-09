@@ -23,6 +23,7 @@
   --shadow: 0 18px 48px rgba(42, 54, 75, 0.18);
   --shadow-active: 0 24px 70px rgba(23, 34, 51, 0.28);
   --taskbar-height: 58px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 :root[data-theme="dark"] {
@@ -110,23 +111,6 @@ a {
   pointer-events: none;
 }
 
-.desktop__status {
-  position: absolute;
-  top: 18px;
-  right: 22px;
-  z-index: 2;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-muted);
-  background: color-mix(in srgb, var(--surface) 72%, transparent);
-  backdrop-filter: blur(18px);
-  font-size: 0.82rem;
-}
-
 .desktop-icon {
   display: grid;
   justify-items: center;
@@ -139,12 +123,27 @@ a {
   background: transparent;
   cursor: default;
   text-align: center;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms var(--ease-out);
 
-  &:hover,
+  &:active {
+    transform: scale(0.97);
+  }
+
   &:focus-visible {
     border-color: var(--border);
     background: var(--accent-soft);
     outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--border);
+      background: var(--accent-soft);
+      outline: none;
+    }
   }
 }
 
@@ -187,10 +186,29 @@ a {
   box-shadow: var(--shadow);
   pointer-events: auto;
   backdrop-filter: blur(18px);
+  transform: translate(var(--window-x, 0), var(--window-y, 0));
+  transform-origin: center;
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    border-color 160ms ease,
+    border-radius 220ms var(--ease-out),
+    box-shadow 180ms ease;
+
+  @starting-style {
+    opacity: 0;
+    transform: translate(var(--window-x, 0), var(--window-y, 0)) scale(0.96);
+  }
 
   &[data-active="true"] {
     border-color: color-mix(in srgb, var(--accent) 48%, var(--border-strong));
     box-shadow: var(--shadow-active);
+  }
+
+  &[data-interacting="true"] {
+    transition:
+      border-color 160ms ease,
+      box-shadow 180ms ease;
   }
 
   &[data-maximized="true"] {
@@ -249,12 +267,27 @@ a {
     cursor: default;
     font-size: 0.78rem;
     font-weight: 800;
+    transition:
+      background-color 140ms ease,
+      border-color 140ms ease,
+      transform 120ms var(--ease-out);
 
-    &:hover,
+    &:active {
+      transform: scale(0.94);
+    }
+
     &:focus-visible {
       border-color: var(--accent);
       background: var(--accent-soft);
       outline: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        outline: none;
+      }
     }
   }
 }
@@ -360,12 +393,28 @@ a {
   color: var(--text);
   background: var(--surface-strong);
   cursor: default;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 160ms ease,
+    transform 120ms var(--ease-out);
 
-  &:hover,
+  &:active {
+    transform: scale(0.97);
+  }
+
   &:focus-visible {
     border-color: var(--accent);
     background: var(--accent-soft);
     outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      outline: none;
+    }
   }
 }
 
@@ -444,11 +493,24 @@ a {
   color: var(--text);
   background: var(--surface-strong);
   text-decoration: none;
+  transition:
+    border-color 140ms ease,
+    transform 140ms var(--ease-out);
 
-  &:hover,
+  &:active {
+    transform: scale(0.985);
+  }
+
   &:focus-visible {
     border-color: var(--accent);
     outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--accent);
+      outline: none;
+    }
   }
 
   h2 {
@@ -552,10 +614,6 @@ a {
     padding: 12px;
   }
 
-  .desktop__status {
-    display: none;
-  }
-
   .window {
     min-width: 0;
 
@@ -583,5 +641,30 @@ a {
 
   .taskbar__item {
     min-width: 98px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-icon,
+  .window,
+  .window__controls button,
+  .taskbar__start,
+  .taskbar__theme,
+  .taskbar__item,
+  .content-card {
+    transition:
+      opacity 120ms ease,
+      background-color 120ms ease,
+      border-color 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  .desktop-icon:active,
+  .window__controls button:active,
+  .taskbar__start:active,
+  .taskbar__theme:active,
+  .taskbar__item:active,
+  .content-card:active {
+    transform: none;
   }
 }
