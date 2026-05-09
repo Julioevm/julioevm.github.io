@@ -2,7 +2,14 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type Theme = "light" | "dark" | "system";
-export type WindowKind = "blog" | "blogIndex" | "project" | "projectIndex" | "about" | "contact";
+export type WindowKind =
+  | "blog"
+  | "blogIndex"
+  | "project"
+  | "projectIndex"
+  | "game"
+  | "about"
+  | "contact";
 
 export type DesktopWindow = {
   id: string;

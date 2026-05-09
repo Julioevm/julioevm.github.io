@@ -1,4 +1,5 @@
 import { blogPosts, getBlogPost } from "./posts";
+import { games, getGame } from "./games";
 import { getProject, projects } from "./projects";
 import type { WindowSeed } from "../store/desktopStore";
 
@@ -65,6 +66,22 @@ const getProjectWindow = (slug: string): WindowSeed | null => {
     : null;
 };
 
+const getGameWindow = (slug: string): WindowSeed | null => {
+  const game = getGame(slug);
+  return game
+    ? {
+        id: `game:${game.slug}`,
+        kind: "game",
+        title: game.title,
+        route: `/games/${game.slug}`,
+        width: 980,
+        height: 680,
+        x: 118,
+        y: 58
+      }
+    : null;
+};
+
 export const getRouteWindow = (pathname: string): WindowSeed | null => {
   if (pathname === "/" || pathname === "") {
     return null;
@@ -96,6 +113,11 @@ export const getRouteWindow = (pathname: string): WindowSeed | null => {
     return getProjectWindow(projectMatch[1]);
   }
 
+  const gameMatch = pathname.match(/^\/games\/([^/]+)$/);
+  if (gameMatch) {
+    return getGameWindow(gameMatch[1]);
+  }
+
   return null;
 };
 
@@ -110,6 +132,10 @@ export const featuredDesktopItems = [
   }),
   ...projects.slice(0, 2).flatMap((project) => {
     const window = getProjectWindow(project.slug);
+    return window ? [window] : [];
+  }),
+  ...games.flatMap((game) => {
+    const window = getGameWindow(game.slug);
     return window ? [window] : [];
   })
 ] as WindowSeed[];

@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import remarkGfm from "remark-gfm";
+import { getGame } from "../content/games";
 import { blogPosts, getBlogPost } from "../content/posts";
 import { getProject, projects } from "../content/projects";
 import type { DesktopWindow } from "../store/desktopStore";
@@ -91,6 +92,26 @@ export function WindowContent({ window }: WindowContentProps) {
           ) : null}
         </div>
       </article>
+    );
+  }
+
+  if (window.kind === "game") {
+    const slug = window.route.split("/").at(-1) ?? "";
+    const game = getGame(slug);
+    if (!game) {
+      return <MissingContent />;
+    }
+
+    return (
+      <div className="game-window" aria-label={game.title}>
+        <iframe
+          className="game-window__frame"
+          title={game.title}
+          src={game.url}
+          referrerPolicy="no-referrer"
+          allow="fullscreen; gamepad"
+        />
+      </div>
     );
   }
 

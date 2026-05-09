@@ -21,6 +21,7 @@ const compactMenuItems = (items: Array<(typeof featuredDesktopItems)[number] | u
   items.filter((item): item is (typeof featuredDesktopItems)[number] => Boolean(item));
 
 const blogItems = featuredDesktopItems.filter((item) => item.kind === "blog");
+const gameItems = featuredDesktopItems.filter((item) => item.kind === "game");
 const projectItems = featuredDesktopItems.filter((item) => item.kind === "project");
 const documentItems = compactMenuItems([
   getMenuItem("project:os-portfolio"),
@@ -61,8 +62,8 @@ const startMenuSections: StartMenuSection[] = [
   {
     id: "games",
     title: "Games",
-    icon: "app",
-    items: []
+    icon: "gamepad",
+    items: gameItems
   }
 ];
 
