@@ -194,7 +194,7 @@ a {
   }
 
   &[data-maximized="true"] {
-    inset: 0 0 var(--taskbar-height);
+    inset: 0;
     width: auto;
     height: auto;
     transform: none;
