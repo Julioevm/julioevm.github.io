@@ -82,11 +82,11 @@ export function WindowContent({ window }: WindowContentProps) {
         <p className="project-document__summary">{project.summary}</p>
         <p>{project.body}</p>
         <div className="project-document__links">
-          <a href={project.githubUrl} target="_blank" rel="noreferrer">
+          <a href={project.githubUrl}>
             GitHub
           </a>
           {project.liveUrl ? (
-            <a href={project.liveUrl} target="_blank" rel="noreferrer">
+            <a href={project.liveUrl}>
               Live
             </a>
           ) : null}
@@ -154,13 +154,13 @@ export function WindowContent({ window }: WindowContentProps) {
         </p>
         <div className="contact-grid">
           <a href="mailto:julioevm@gmail.com">julioevm@gmail.com</a>
-          <a href="https://github.com/Julioevm" target="_blank" rel="noreferrer">
+          <a href="https://github.com/Julioevm">
             GitHub
           </a>
-          <a href="https://www.linkedin.com/in/julioevm/" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/julioevm/">
             LinkedIn
           </a>
-          <a href="https://juliovalls.netlify.app/" target="_blank" rel="noreferrer">
+          <a href="https://juliovalls.netlify.app/">
             Resume
           </a>
         </div>

@@ -14,9 +14,9 @@ export const projects: Project[] = [
     slug: "os-portfolio",
     title: "OS Portfolio",
     summary: "A portfolio presented as a modern desktop environment with movable document windows.",
-    githubUrl: "https://github.com/reave/portfolio",
+    githubUrl: "https://github.com/Julioevm/julioevm.github.io",
     tags: ["React", "Vite", "SCSS", "Zustand"],
-    body: "A spatial portfolio interface with Markdown documents, project windows, persisted layout state, and shareable deep links."
+    body: "A spatial portfolio interface with Markdown documents, project windows, persisted layout state, and shareable deep links. The app is built with React and Vite, uses Zustand for desktop/window state, and keeps routes synchronized so each document can be opened directly while still feeling like part of the same desktop."
   },
   {
     slug: "markdown-workbench",
