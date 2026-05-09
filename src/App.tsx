@@ -6,6 +6,7 @@ import { useDesktopStore } from "./store/desktopStore";
 
 export default function App() {
   const location = useLocation();
+  const pathname = location.pathname;
   const openWindow = useDesktopStore((state) => state.openWindow);
   const setTheme = useDesktopStore((state) => state.setTheme);
   const theme = useDesktopStore((state) => state.theme);
@@ -16,11 +17,11 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    const routeWindow = getRouteWindow(location.pathname);
+    const routeWindow = getRouteWindow(pathname);
     if (routeWindow) {
       openWindow(routeWindow);
     }
-  }, [location.pathname, openWindow]);
+  }, [pathname, openWindow]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");

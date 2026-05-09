@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 import type { WindowKind } from "../store/desktopStore";
 
-export type IconName =
+type IconName =
   | "app"
   | "article"
   | "code"

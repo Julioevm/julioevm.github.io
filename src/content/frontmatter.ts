@@ -1,4 +1,4 @@
-export type FrontmatterValue = string | string[];
+type FrontmatterValue = string | string[];
 
 export function parseMarkdown(source: string) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);

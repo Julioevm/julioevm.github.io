@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type Theme = "light" | "dark" | "system";
+type Theme = "light" | "dark" | "system";
 export type WindowKind = "blog" | "blogIndex" | "project" | "projectIndex" | "about" | "contact";
 
 export type DesktopWindow = {
@@ -79,7 +79,11 @@ export const useDesktopStore = create<DesktopState>()(
           const windows = state.windows.filter((window) => window.id !== id);
           const activeWindowId =
             state.activeWindowId === id
-              ? [...windows].sort((a, b) => b.zIndex - a.zIndex)[0]?.id ?? null
+              ? windows.reduce<DesktopWindow | null>(
+                  (topWindow, window) =>
+                    topWindow && topWindow.zIndex > window.zIndex ? topWindow : window,
+                  null
+                )?.id ?? null
               : state.activeWindowId;
           return { windows, activeWindowId };
         }),

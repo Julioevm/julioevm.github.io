@@ -37,7 +37,7 @@ export const defaultWindows = {
   }
 } satisfies Record<string, WindowSeed>;
 
-export const getBlogWindow = (slug: string): WindowSeed | null => {
+const getBlogWindow = (slug: string): WindowSeed | null => {
   const post = getBlogPost(slug);
   return post
     ? {
@@ -51,7 +51,7 @@ export const getBlogWindow = (slug: string): WindowSeed | null => {
     : null;
 };
 
-export const getProjectWindow = (slug: string): WindowSeed | null => {
+const getProjectWindow = (slug: string): WindowSeed | null => {
   const project = getProject(slug);
   return project
     ? {
@@ -104,6 +104,12 @@ export const featuredDesktopItems = [
   defaultWindows.projectIndex,
   defaultWindows.about,
   defaultWindows.contact,
-  ...blogPosts.slice(0, 2).map((post) => getBlogWindow(post.slug)).filter(Boolean),
-  ...projects.slice(0, 2).map((project) => getProjectWindow(project.slug)).filter(Boolean)
+  ...blogPosts.slice(0, 2).flatMap((post) => {
+    const window = getBlogWindow(post.slug);
+    return window ? [window] : [];
+  }),
+  ...projects.slice(0, 2).flatMap((project) => {
+    const window = getProjectWindow(project.slug);
+    return window ? [window] : [];
+  })
 ] as WindowSeed[];
