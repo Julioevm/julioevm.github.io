@@ -20,6 +20,14 @@ export const defaultWindows = {
     width: 780,
     height: 560
   },
+  documents: {
+    id: "documents",
+    kind: "folder",
+    title: "Documents",
+    route: "/documents",
+    width: 700,
+    height: 480
+  },
   about: {
     id: "about",
     kind: "about",
@@ -48,7 +56,7 @@ export const defaultWindows = {
   }
 } satisfies Record<string, WindowSeed>;
 
-const getBlogWindow = (slug: string): WindowSeed | null => {
+export const getBlogWindow = (slug: string): WindowSeed | null => {
   const post = getBlogPost(slug);
   return post
     ? {
@@ -81,6 +89,11 @@ export const projectFileItems = projects.flatMap((project) => {
   return window ? [window] : [];
 });
 
+export const documentFileItems = blogPosts.flatMap((post) => {
+  const window = getBlogWindow(post.slug);
+  return window ? [window] : [];
+});
+
 const getGameWindow = (slug: string): WindowSeed | null => {
   const game = getGame(slug);
   return game
@@ -108,6 +121,10 @@ export const getRouteWindow = (pathname: string): WindowSeed | null => {
 
   if (pathname === "/projects") {
     return defaultWindows.projectIndex;
+  }
+
+  if (pathname === "/documents") {
+    return defaultWindows.documents;
   }
 
   if (pathname === "/about") {
@@ -143,13 +160,10 @@ export const getRouteWindow = (pathname: string): WindowSeed | null => {
 export const featuredDesktopItems = [
   defaultWindows.blogIndex,
   defaultWindows.projectIndex,
+  defaultWindows.documents,
   defaultWindows.about,
   defaultWindows.contact,
   defaultWindows.resume,
-  ...blogPosts.slice(0, 2).flatMap((post) => {
-    const window = getBlogWindow(post.slug);
-    return window ? [window] : [];
-  }),
   ...games.flatMap((game) => {
     const window = getGameWindow(game.slug);
     return window ? [window] : [];

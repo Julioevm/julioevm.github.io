@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import { getGame } from "../content/games";
 import { blogPosts, getBlogPost } from "../content/posts";
 import { getProject } from "../content/projects";
-import { projectFileItems } from "../content/routes";
+import { documentFileItems, projectFileItems } from "../content/routes";
 import { useDesktopStore, type DesktopWindow, type WindowSeed } from "../store/desktopStore";
 import { Icon, getWindowIcon } from "./Icon";
 
@@ -41,8 +41,19 @@ export function WindowContent({ window }: WindowContentProps) {
   }
 
   if (window.kind === "folder" || window.kind === "projectIndex") {
+    if (window.route === "/documents") {
+      return (
+        <FolderView
+          ariaLabel="Documents files"
+          items={documentFileItems}
+          onOpen={openFile}
+        />
+      );
+    }
+
     return (
       <FolderView
+        ariaLabel="Projects files"
         title="Projects"
         summary="Selected work, experiments, and repositories stored as project files."
         items={projectFileItems}
@@ -175,20 +186,23 @@ export function WindowContent({ window }: WindowContentProps) {
 }
 
 type FolderViewProps = {
-  title: string;
-  summary: string;
+  ariaLabel: string;
+  title?: string;
+  summary?: string;
   items: WindowSeed[];
   onOpen: (item: WindowSeed) => void;
 };
 
-function FolderView({ title, summary, items, onOpen }: FolderViewProps) {
+function FolderView({ ariaLabel, title, summary, items, onOpen }: FolderViewProps) {
   return (
     <div className="folder-view">
-      <div className="folder-view__header">
-        <h1>{title}</h1>
-        <p>{summary}</p>
-      </div>
-      <div className="folder-view__grid" role="list" aria-label={`${title} files`}>
+      {title || summary ? (
+        <div className="folder-view__header">
+          {title ? <h1>{title}</h1> : null}
+          {summary ? <p>{summary}</p> : null}
+        </div>
+      ) : null}
+      <div className="folder-view__grid" role="list" aria-label={ariaLabel}>
         {items.map((item) => {
           const project = getProject(item.route.split("/").at(-1) ?? "");
           return (
