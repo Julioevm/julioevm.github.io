@@ -13,6 +13,13 @@ export const games: Game[] = [
     summary: "A browser-playable 3D take on NetHack, presented in a local desktop game window.",
     url: "https://jamesiv4.github.io/nethack-3d/",
     tags: ["Game", "Browser", "3D"]
+  },
+  {
+    slug: "zip",
+    title: "Zip",
+    summary: "A browser-playable puzzle game embedded directly into the desktop.",
+    url: "https://playzip.netlify.app/",
+    tags: ["Game", "Browser", "Puzzle"]
   }
 ];
 
