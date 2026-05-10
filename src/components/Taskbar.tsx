@@ -230,7 +230,6 @@ export function Taskbar() {
           aria-expanded={isStartOpen}
           aria-haspopup="menu"
         >
-          <Icon name="app" />
           <span>Start</span>
         </button>
       </div>
