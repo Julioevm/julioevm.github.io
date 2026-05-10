@@ -681,6 +681,7 @@ a {
 }
 
 .content-list,
+.folder-view,
 .plain-document,
 .markdown-document,
 .project-document {
@@ -692,6 +693,109 @@ a {
 .content-list {
   display: grid;
   gap: 14px;
+}
+
+.folder-view {
+  display: grid;
+  gap: 20px;
+}
+
+.folder-view__header {
+  h1 {
+    margin: 0 0 8px;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    line-height: 1.1;
+  }
+
+  p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--text-muted);
+  }
+}
+
+.folder-view__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 12px;
+}
+
+.folder-file {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 148px;
+  align-content: start;
+  justify-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: default;
+  text-align: center;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms var(--ease-out);
+
+  &:active {
+    transform: scale(0.985);
+  }
+
+  &:focus-visible {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      outline: none;
+    }
+  }
+}
+
+.folder-file__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 58px;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  background: var(--surface-strong);
+  color: var(--accent);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.folder-file__name {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.folder-file__meta {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: uppercase;
 }
 
 .content-list__intro {

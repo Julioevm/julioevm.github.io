@@ -5,6 +5,7 @@ type IconName =
   | "app"
   | "article"
   | "code"
+  | "folder"
   | "folderCode"
   | "gamepad"
   | "mail"
@@ -21,6 +22,7 @@ const windowIconMap: Record<WindowKind, IconName> = {
   blog: "article",
   blogIndex: "article",
   contact: "mail",
+  folder: "folder",
   game: "gamepad",
   project: "code",
   projectIndex: "folderCode",
@@ -71,6 +73,12 @@ export function Icon({ name, ...props }: IconProps) {
           <path d="M3.8 7.2A2.2 2.2 0 0 1 6 5h4l2 2h6A2.2 2.2 0 0 1 20.2 9.2v7.6A2.2 2.2 0 0 1 18 19H6a2.2 2.2 0 0 1-2.2-2.2Z" />
           <path d="m10.4 11.1-2 1.9 2 1.9" />
           <path d="m13.6 11.1 2 1.9-2 1.9" />
+        </>
+      ) : null}
+      {name === "folder" ? (
+        <>
+          <path d="M3.8 7.2A2.2 2.2 0 0 1 6 5h4l2 2h6A2.2 2.2 0 0 1 20.2 9.2v7.6A2.2 2.2 0 0 1 18 19H6a2.2 2.2 0 0 1-2.2-2.2Z" />
+          <path d="M4 9h16" />
         </>
       ) : null}
       {name === "gamepad" ? (

@@ -14,7 +14,7 @@ export const defaultWindows = {
   },
   projectIndex: {
     id: "projects",
-    kind: "projectIndex",
+    kind: "folder",
     title: "Projects",
     route: "/projects",
     width: 780,
@@ -62,7 +62,7 @@ const getBlogWindow = (slug: string): WindowSeed | null => {
     : null;
 };
 
-const getProjectWindow = (slug: string): WindowSeed | null => {
+export const getProjectWindow = (slug: string): WindowSeed | null => {
   const project = getProject(slug);
   return project
     ? {
@@ -75,6 +75,11 @@ const getProjectWindow = (slug: string): WindowSeed | null => {
       }
     : null;
 };
+
+export const projectFileItems = projects.flatMap((project) => {
+  const window = getProjectWindow(project.slug);
+  return window ? [window] : [];
+});
 
 const getGameWindow = (slug: string): WindowSeed | null => {
   const game = getGame(slug);
@@ -143,10 +148,6 @@ export const featuredDesktopItems = [
   defaultWindows.resume,
   ...blogPosts.slice(0, 2).flatMap((post) => {
     const window = getBlogWindow(post.slug);
-    return window ? [window] : [];
-  }),
-  ...projects.slice(0, 2).flatMap((project) => {
-    const window = getProjectWindow(project.slug);
     return window ? [window] : [];
   }),
   ...games.flatMap((game) => {

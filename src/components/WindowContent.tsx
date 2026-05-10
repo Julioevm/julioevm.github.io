@@ -1,16 +1,26 @@
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import remarkGfm from "remark-gfm";
 import { getGame } from "../content/games";
 import { blogPosts, getBlogPost } from "../content/posts";
-import { getProject, projects } from "../content/projects";
-import type { DesktopWindow } from "../store/desktopStore";
+import { getProject } from "../content/projects";
+import { projectFileItems } from "../content/routes";
+import { useDesktopStore, type DesktopWindow, type WindowSeed } from "../store/desktopStore";
+import { Icon, getWindowIcon } from "./Icon";
 
 type WindowContentProps = {
   window: DesktopWindow;
 };
 
 export function WindowContent({ window }: WindowContentProps) {
+  const navigate = useNavigate();
+  const openWindow = useDesktopStore((state) => state.openWindow);
+
+  const openFile = (item: WindowSeed) => {
+    openWindow(item);
+    navigate(item.route);
+  };
+
   if (window.kind === "blogIndex") {
     return (
       <div className="content-list">
@@ -30,21 +40,14 @@ export function WindowContent({ window }: WindowContentProps) {
     );
   }
 
-  if (window.kind === "projectIndex") {
+  if (window.kind === "folder" || window.kind === "projectIndex") {
     return (
-      <div className="content-list">
-        <div className="content-list__intro">
-          <h1>Projects</h1>
-          <p>Selected work, experiments, and repositories presented as local project documents.</p>
-        </div>
-        {projects.map((project) => (
-          <Link className="content-card" to={`/projects/${project.slug}`} key={project.slug}>
-            <span className="content-card__meta">{project.tags.join(" / ")}</span>
-            <h2>{project.title}</h2>
-            <p>{project.summary}</p>
-          </Link>
-        ))}
-      </div>
+      <FolderView
+        title="Projects"
+        summary="Selected work, experiments, and repositories stored as project files."
+        items={projectFileItems}
+        onOpen={openFile}
+      />
     );
   }
 
@@ -134,7 +137,7 @@ export function WindowContent({ window }: WindowContentProps) {
         <h1>About</h1>
         <p>
           This portfolio is built as a small desktop: documents open in windows, projects behave like
-          files, and the layout remembers where you left it.
+          files inside folders, and the layout remembers where you left it.
         </p>
         <p>
           The interface is intentionally familiar, but styled with a modern light and dark theme
@@ -169,6 +172,47 @@ export function WindowContent({ window }: WindowContentProps) {
   }
 
   return <MissingContent />;
+}
+
+type FolderViewProps = {
+  title: string;
+  summary: string;
+  items: WindowSeed[];
+  onOpen: (item: WindowSeed) => void;
+};
+
+function FolderView({ title, summary, items, onOpen }: FolderViewProps) {
+  return (
+    <div className="folder-view">
+      <div className="folder-view__header">
+        <h1>{title}</h1>
+        <p>{summary}</p>
+      </div>
+      <div className="folder-view__grid" role="list" aria-label={`${title} files`}>
+        {items.map((item) => {
+          const project = getProject(item.route.split("/").at(-1) ?? "");
+          return (
+            <div key={item.id} role="listitem">
+              <button
+                className="folder-file"
+                type="button"
+                onClick={() => onOpen(item)}
+                onDoubleClick={() => onOpen(item)}
+              >
+                <span className="folder-file__icon" aria-hidden="true">
+                  <Icon name={getWindowIcon(item.kind)} />
+                </span>
+                <span className="folder-file__name">{item.title}</span>
+                {project ? (
+                  <span className="folder-file__meta">{project.tags.join(" / ")}</span>
+                ) : null}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 function MissingContent() {

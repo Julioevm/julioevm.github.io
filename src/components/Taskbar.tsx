@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { featuredDesktopItems } from "../content/routes";
+import { featuredDesktopItems, projectFileItems } from "../content/routes";
 import { useDesktopStore } from "../store/desktopStore";
 import { Icon, getWindowIcon } from "./Icon";
 
@@ -22,10 +22,9 @@ const compactMenuItems = (items: Array<(typeof featuredDesktopItems)[number] | u
 
 const blogItems = featuredDesktopItems.filter((item) => item.kind === "blog");
 const gameItems = featuredDesktopItems.filter((item) => item.kind === "game");
-const projectItems = featuredDesktopItems.filter((item) => item.kind === "project");
 const documentItems = compactMenuItems([
-  getMenuItem("project:os-portfolio"),
-  getMenuItem("project:markdown-workbench")
+  projectFileItems.find((item) => item.id === "project:os-portfolio"),
+  projectFileItems.find((item) => item.id === "project:markdown-workbench")
 ]);
 const startMenuActions = compactMenuItems([
   getMenuItem("about"),
@@ -46,8 +45,8 @@ const startMenuSections: StartMenuSection[] = [
   {
     id: "projects",
     title: "Projects",
-    icon: "folderCode",
-    items: compactMenuItems([getMenuItem("projects"), ...projectItems])
+    icon: "folder",
+    items: compactMenuItems([getMenuItem("projects"), ...projectFileItems])
   },
   {
     id: "documents",

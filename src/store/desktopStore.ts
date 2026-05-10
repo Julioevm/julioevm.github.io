@@ -5,6 +5,7 @@ export type Theme = "light" | "dark" | "system";
 export type WindowKind =
   | "blog"
   | "blogIndex"
+  | "folder"
   | "project"
   | "projectIndex"
   | "game"
