@@ -5,7 +5,8 @@ import { getGame } from "../content/games";
 import { blogPosts, getBlogPost } from "../content/posts";
 import { aboutContent, contactContent } from "../content/profile";
 import { getProject } from "../content/projects";
-import { documentFileItems, projectFileItems } from "../content/routes";
+import { documentFileItems, getRouteWindow, projectFileItems } from "../content/routes";
+import { welcomeContent } from "../content/welcome";
 import { useDesktopStore, type DesktopWindow, type WindowSeed } from "../store/desktopStore";
 import { Icon, getWindowIcon } from "./Icon";
 
@@ -16,11 +17,31 @@ type WindowContentProps = {
 export function WindowContent({ window }: WindowContentProps) {
   const navigate = useNavigate();
   const openWindow = useDesktopStore((state) => state.openWindow);
+  const shouldShowWelcome = useDesktopStore((state) => state.shouldShowWelcome);
+  const setShouldShowWelcome = useDesktopStore((state) => state.setShouldShowWelcome);
 
   const openFile = (item: WindowSeed) => {
     openWindow(item);
     navigate(item.route);
   };
+
+  const openRoute = (route: string) => {
+    const routeWindow = getRouteWindow(route);
+    if (routeWindow) {
+      openWindow(routeWindow);
+    }
+    navigate(route);
+  };
+
+  if (window.kind === "welcome") {
+    return (
+      <WelcomeView
+        onOpenRoute={openRoute}
+        shouldShowWelcome={shouldShowWelcome}
+        onShouldShowWelcomeChange={setShouldShowWelcome}
+      />
+    );
+  }
 
   if (window.kind === "blogIndex") {
     return (
@@ -185,6 +206,46 @@ function TextDocumentView({ document }: { document: { title: string; paragraphs:
       {document.paragraphs.map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
       ))}
+    </article>
+  );
+}
+
+function WelcomeView({
+  onOpenRoute,
+  shouldShowWelcome,
+  onShouldShowWelcomeChange
+}: {
+  onOpenRoute: (route: string) => void;
+  shouldShowWelcome: boolean;
+  onShouldShowWelcomeChange: (shouldShowWelcome: boolean) => void;
+}) {
+  return (
+    <article className="welcome-document">
+      <h1>{welcomeContent.title}</h1>
+      {welcomeContent.paragraphs.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+      <div className="welcome-grid" aria-label="Things to explore">
+        {welcomeContent.highlights.map((highlight) => (
+          <button
+            className="welcome-card"
+            type="button"
+            key={highlight.route}
+            onClick={() => onOpenRoute(highlight.route)}
+          >
+            <span>{highlight.title}</span>
+            <small>{highlight.description}</small>
+          </button>
+        ))}
+      </div>
+      <label className="welcome-option">
+        <input
+          type="checkbox"
+          checked={!shouldShowWelcome}
+          onChange={(event) => onShouldShowWelcomeChange(!event.currentTarget.checked)}
+        />
+        <span>Don't show this again</span>
+      </label>
     </article>
   );
 }

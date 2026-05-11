@@ -683,6 +683,7 @@ a {
 .content-list,
 .folder-view,
 .plain-document,
+.welcome-document,
 .markdown-document,
 .project-document {
   max-width: 760px;
@@ -872,6 +873,7 @@ a {
 
 .markdown-document,
 .plain-document,
+.welcome-document,
 .project-document {
   h1 {
     margin: 0 0 16px;
@@ -906,6 +908,75 @@ a {
       padding: 0;
       background: transparent;
     }
+  }
+}
+
+.welcome-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.welcome-card {
+  display: grid;
+  gap: 7px;
+  min-height: 124px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  color: var(--text);
+  cursor: default;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms var(--ease-out);
+
+  span {
+    font-weight: 800;
+  }
+
+  small {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  &:active {
+    transform: scale(0.985);
+  }
+
+  &:focus-visible {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      outline: none;
+    }
+  }
+}
+
+.welcome-option {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+  cursor: default;
+
+  input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
   }
 }
 

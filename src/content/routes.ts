@@ -4,6 +4,16 @@ import { getProject, projects } from "./projects";
 import type { WindowSeed } from "../store/desktopStore";
 
 export const defaultWindows = {
+  welcome: {
+    id: "welcome",
+    kind: "welcome",
+    title: "Welcome",
+    route: "/",
+    width: 700,
+    height: 520,
+    x: 260,
+    y: 74
+  },
   blogIndex: {
     id: "blog",
     kind: "blogIndex",
@@ -112,7 +122,7 @@ const getGameWindow = (slug: string): WindowSeed | null => {
 
 export const getRouteWindow = (pathname: string): WindowSeed | null => {
   if (pathname === "/" || pathname === "") {
-    return null;
+    return defaultWindows.welcome;
   }
 
   if (pathname === "/blog") {
@@ -158,6 +168,7 @@ export const getRouteWindow = (pathname: string): WindowSeed | null => {
 };
 
 export const featuredDesktopItems = [
+  defaultWindows.welcome,
   defaultWindows.blogIndex,
   defaultWindows.projectIndex,
   defaultWindows.documents,

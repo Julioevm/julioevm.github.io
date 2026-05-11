@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 export type Theme = "light" | "dark" | "system";
 export type WindowKind =
+  | "welcome"
   | "blog"
   | "blogIndex"
   | "folder"
@@ -35,7 +36,9 @@ type DesktopState = {
   windows: DesktopWindow[];
   activeWindowId: string | null;
   nextZIndex: number;
+  shouldShowWelcome: boolean;
   setTheme: (theme: Theme) => void;
+  setShouldShowWelcome: (shouldShowWelcome: boolean) => void;
   openWindow: (window: WindowSeed) => void;
   closeWindow: (id: string) => void;
   focusWindow: (id: string) => void;
@@ -67,7 +70,9 @@ export const useDesktopStore = create<DesktopState>()(
       windows: [],
       activeWindowId: null,
       nextZIndex: 10,
+      shouldShowWelcome: true,
       setTheme: (theme) => set({ theme }),
+      setShouldShowWelcome: (shouldShowWelcome) => set({ shouldShowWelcome }),
       openWindow: (windowSeed) => {
         const existing = get().windows.find((window) => window.id === windowSeed.id);
         if (existing) {
@@ -151,6 +156,16 @@ export const useDesktopStore = create<DesktopState>()(
     }),
     {
       name: "os-portfolio-desktop",
+      partialize: (state) => ({
+        ...state,
+        activeWindowId:
+          state.shouldShowWelcome || state.activeWindowId !== "welcome"
+            ? state.activeWindowId
+            : null,
+        windows: state.shouldShowWelcome
+          ? state.windows
+          : state.windows.filter((window) => window.id !== "welcome")
+      }),
       version: 2
     }
   )

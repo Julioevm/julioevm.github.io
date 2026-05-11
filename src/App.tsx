@@ -13,6 +13,7 @@ export default function App() {
   const location = useLocation();
   const pathname = location.pathname;
   const openWindow = useDesktopStore((state) => state.openWindow);
+  const shouldShowWelcome = useDesktopStore((state) => state.shouldShowWelcome);
   const theme = useDesktopStore((state) => state.theme);
 
   useEffect(() => {
@@ -37,11 +38,15 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
+    if ((pathname === "/" || pathname === "") && !shouldShowWelcome) {
+      return;
+    }
+
     const routeWindow = getRouteWindow(pathname);
     if (routeWindow) {
       openWindow(routeWindow);
     }
-  }, [pathname, openWindow]);
+  }, [pathname, openWindow, shouldShowWelcome]);
 
   return <Desktop />;
 }
