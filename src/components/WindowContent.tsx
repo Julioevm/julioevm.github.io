@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import remarkGfm from "remark-gfm";
 import { getGame } from "../content/games";
 import { blogPosts, getBlogPost } from "../content/posts";
+import { aboutContent, contactContent } from "../content/profile";
 import { getProject } from "../content/projects";
 import { documentFileItems, projectFileItems } from "../content/routes";
 import { useDesktopStore, type DesktopWindow, type WindowSeed } from "../store/desktopStore";
@@ -144,39 +145,23 @@ export function WindowContent({ window }: WindowContentProps) {
 
   if (window.kind === "about") {
     return (
-      <article className="plain-document">
-        <h1>About</h1>
-        <p>
-          This portfolio is built as a small desktop: documents open in windows, projects behave like
-          files inside folders, and the layout remembers where you left it.
-        </p>
-        <p>
-          The interface is intentionally familiar, but styled with a modern light and dark theme
-          rather than a literal retro skin.
-        </p>
-      </article>
+      <TextDocumentView document={aboutContent} />
     );
   }
 
   if (window.kind === "contact") {
     return (
       <article className="plain-document">
-        <h1>Contact</h1>
-        <p>
-          Julio Valls Martinez, Technical Lead based in Valencia, Spain. Open to technical
-          leadership, frontend engineering, product UI, and systems-heavy web work.
-        </p>
+        <h1>{contactContent.title}</h1>
+        {contactContent.paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
         <div className="contact-grid">
-          <a href="mailto:julioevm@gmail.com">julioevm@gmail.com</a>
-          <a href="https://github.com/Julioevm">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/julioevm/">
-            LinkedIn
-          </a>
-          <a href="https://juliovalls.netlify.app/">
-            Resume
-          </a>
+          {contactContent.links.map((link) => (
+            <a href={link.href} key={link.href}>
+              {link.label}
+            </a>
+          ))}
         </div>
       </article>
     );
@@ -192,6 +177,17 @@ type FolderViewProps = {
   items: WindowSeed[];
   onOpen: (item: WindowSeed) => void;
 };
+
+function TextDocumentView({ document }: { document: { title: string; paragraphs: string[] } }) {
+  return (
+    <article className="plain-document">
+      <h1>{document.title}</h1>
+      {document.paragraphs.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+    </article>
+  );
+}
 
 function FolderView({ ariaLabel, title, summary, items, onOpen }: FolderViewProps) {
   return (
