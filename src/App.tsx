@@ -14,6 +14,7 @@ export default function App() {
   const pathname = location.pathname;
   const openWindow = useDesktopStore((state) => state.openWindow);
   const shouldShowWelcome = useDesktopStore((state) => state.shouldShowWelcome);
+  const hasSeenWelcomeThisSession = useDesktopStore((state) => state.hasSeenWelcomeThisSession);
   const theme = useDesktopStore((state) => state.theme);
 
   useEffect(() => {
@@ -38,7 +39,10 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    if ((pathname === "/" || pathname === "") && !shouldShowWelcome) {
+    if (
+      (pathname === "/" || pathname === "") &&
+      (!shouldShowWelcome || hasSeenWelcomeThisSession)
+    ) {
       return;
     }
 
@@ -46,7 +50,7 @@ export default function App() {
     if (routeWindow) {
       openWindow(routeWindow);
     }
-  }, [pathname, openWindow, shouldShowWelcome]);
+  }, [pathname, openWindow, shouldShowWelcome, hasSeenWelcomeThisSession]);
 
   return <Desktop />;
 }

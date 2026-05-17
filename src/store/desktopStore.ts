@@ -37,6 +37,7 @@ type DesktopState = {
   activeWindowId: string | null;
   nextZIndex: number;
   shouldShowWelcome: boolean;
+  hasSeenWelcomeThisSession: boolean;
   setTheme: (theme: Theme) => void;
   setShouldShowWelcome: (shouldShowWelcome: boolean) => void;
   openWindow: (window: WindowSeed) => void;
@@ -63,6 +64,22 @@ const defaultWindow = (window: WindowSeed, index: number, zIndex: number): Deskt
   isMaximized: false
 });
 
+const welcomeSessionStorageKey = "os-portfolio-welcome-seen-this-session";
+
+const getHasSeenWelcomeThisSession = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return window.sessionStorage.getItem(welcomeSessionStorageKey) === "true";
+};
+
+const markWelcomeSeenThisSession = () => {
+  if (typeof window !== "undefined") {
+    window.sessionStorage.setItem(welcomeSessionStorageKey, "true");
+  }
+};
+
 export const useDesktopStore = create<DesktopState>()(
   persist(
     (set, get) => ({
@@ -71,8 +88,20 @@ export const useDesktopStore = create<DesktopState>()(
       activeWindowId: null,
       nextZIndex: 10,
       shouldShowWelcome: true,
+      hasSeenWelcomeThisSession: getHasSeenWelcomeThisSession(),
       setTheme: (theme) => set({ theme }),
-      setShouldShowWelcome: (shouldShowWelcome) => set({ shouldShowWelcome }),
+      setShouldShowWelcome: (shouldShowWelcome) => {
+        if (!shouldShowWelcome) {
+          markWelcomeSeenThisSession();
+        }
+
+        set({
+          shouldShowWelcome,
+          hasSeenWelcomeThisSession: shouldShowWelcome
+            ? getHasSeenWelcomeThisSession()
+            : true
+        });
+      },
       openWindow: (windowSeed) => {
         const existing = get().windows.find((window) => window.id === windowSeed.id);
         if (existing) {
@@ -90,6 +119,10 @@ export const useDesktopStore = create<DesktopState>()(
       },
       closeWindow: (id) =>
         set((state) => {
+          if (id === "welcome") {
+            markWelcomeSeenThisSession();
+          }
+
           const windows = state.windows.filter((window) => window.id !== id);
           const activeWindowId =
             state.activeWindowId === id
@@ -99,7 +132,12 @@ export const useDesktopStore = create<DesktopState>()(
                   null
                 )?.id ?? null
               : state.activeWindowId;
-          return { windows, activeWindowId };
+          return {
+            windows,
+            activeWindowId,
+            hasSeenWelcomeThisSession:
+              id === "welcome" ? true : state.hasSeenWelcomeThisSession
+          };
         }),
       focusWindow: (id) =>
         set((state) => ({
@@ -157,14 +195,16 @@ export const useDesktopStore = create<DesktopState>()(
     {
       name: "os-portfolio-desktop",
       partialize: (state) => ({
-        ...state,
+        theme: state.theme,
+        windows: state.shouldShowWelcome
+          ? state.windows
+          : state.windows.filter((window) => window.id !== "welcome"),
         activeWindowId:
           state.shouldShowWelcome || state.activeWindowId !== "welcome"
             ? state.activeWindowId
             : null,
-        windows: state.shouldShowWelcome
-          ? state.windows
-          : state.windows.filter((window) => window.id !== "welcome")
+        nextZIndex: state.nextZIndex,
+        shouldShowWelcome: state.shouldShowWelcome
       }),
       version: 2
     }
