@@ -715,6 +715,109 @@ a {
   }
 }
 
+.project-folder__section {
+  display: grid;
+  gap: 12px;
+}
+
+.project-folder__section-header {
+  h2 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+  }
+
+  p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+}
+
+.featured-projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.featured-project-card {
+  display: grid;
+  gap: 8px;
+  min-height: 210px;
+  align-content: start;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border));
+  border-radius: 9px;
+  background:
+    linear-gradient(135deg, var(--accent-soft), transparent 58%),
+    var(--surface-strong);
+  color: var(--text);
+  cursor: default;
+  text-align: left;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.1);
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 160ms ease,
+    transform 140ms var(--ease-out);
+
+  &:active {
+    transform: scale(0.985);
+  }
+
+  &:focus-visible {
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--accent);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.14);
+      outline: none;
+    }
+  }
+}
+
+.featured-project-card__eyebrow {
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.featured-project-card__title {
+  font-size: 1.25rem;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.featured-project-card__summary {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.featured-project-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
+
+  span {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-strong);
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+}
+
 .folder-view__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
@@ -1072,7 +1175,9 @@ a {
   .taskbar__start,
   .taskbar__theme,
   .taskbar__item,
-  .content-card {
+  .content-card,
+  .featured-project-card,
+  .folder-file {
     transition:
       opacity 120ms ease,
       background-color 120ms ease,
@@ -1085,7 +1190,9 @@ a {
   .taskbar__start:active,
   .taskbar__theme:active,
   .taskbar__item:active,
-  .content-card:active {
+  .content-card:active,
+  .featured-project-card:active,
+  .folder-file:active {
     transform: none;
   }
 }

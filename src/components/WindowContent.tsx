@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import { getGame } from "../content/games";
 import { blogPosts, getBlogPost } from "../content/posts";
 import { aboutContent, contactContent } from "../content/profile";
-import { getProject } from "../content/projects";
+import { featuredProjects, getProject } from "../content/projects";
 import { documentFileItems, getRouteWindow, projectFileItems } from "../content/routes";
 import { welcomeContent } from "../content/welcome";
 import { useDesktopStore, type DesktopWindow, type WindowSeed } from "../store/desktopStore";
@@ -74,13 +74,7 @@ export function WindowContent({ window }: WindowContentProps) {
     }
 
     return (
-      <FolderView
-        ariaLabel="Projects files"
-        title="Projects"
-        summary="Selected work, experiments, and repositories stored as project files."
-        items={projectFileItems}
-        onOpen={openFile}
-      />
+      <ProjectFolderView items={projectFileItems} onOpen={openFile} />
     );
   }
 
@@ -118,9 +112,11 @@ export function WindowContent({ window }: WindowContentProps) {
         <p className="project-document__summary">{project.summary}</p>
         <p>{project.body}</p>
         <div className="project-document__links">
-          <a href={project.githubUrl}>
-            GitHub
-          </a>
+          {project.githubUrl ? (
+            <a href={project.githubUrl}>
+              GitHub
+            </a>
+          ) : null}
           {project.liveUrl ? (
             <a href={project.liveUrl}>
               Live
@@ -210,6 +206,61 @@ function TextDocumentView({ document }: { document: { title: string; paragraphs:
   );
 }
 
+function ProjectFolderView({ items, onOpen }: Pick<FolderViewProps, "items" | "onOpen">) {
+  const featuredItems = featuredProjects.flatMap((project) => {
+    const item = items.find((projectItem) => projectItem.route === `/projects/${project.slug}`);
+    return item ? [{ item, project }] : [];
+  });
+  const repoItems = items.filter((item) => {
+    const project = getProject(item.route.split("/").at(-1) ?? "");
+    return !project?.featured;
+  });
+
+  return (
+    <div className="folder-view project-folder">
+      <div className="folder-view__header">
+        <h1>Projects</h1>
+        <p>Full products, shipped apps, experiments, and public repositories from GitHub.</p>
+      </div>
+      {featuredItems.length > 0 ? (
+        <section className="project-folder__section" aria-labelledby="featured-projects-title">
+          <div className="project-folder__section-header">
+            <h2 id="featured-projects-title">Featured products</h2>
+            <p>Two full-featured products with real users, product surfaces, and deployed sites.</p>
+          </div>
+          <div className="featured-projects">
+            {featuredItems.map(({ item, project }) => (
+              <button
+                className="featured-project-card"
+                type="button"
+                key={project.slug}
+                onClick={() => onOpen(item)}
+                onDoubleClick={() => onOpen(item)}
+              >
+                <span className="featured-project-card__eyebrow">Product highlight</span>
+                <span className="featured-project-card__title">{project.title}</span>
+                <span className="featured-project-card__summary">{project.summary}</span>
+                <span className="tag-row">{project.tags.join(" / ")}</span>
+                <span className="featured-project-card__links">
+                  {project.liveUrl ? <span>Live site</span> : null}
+                  {project.githubUrl ? <span>Public repo</span> : null}
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
+      <section className="project-folder__section" aria-labelledby="repository-projects-title">
+        <div className="project-folder__section-header">
+          <h2 id="repository-projects-title">Public repositories</h2>
+          <p>Open source and public project files with repository links and deployments where available.</p>
+        </div>
+        <FolderGrid ariaLabel="Public repository files" items={repoItems} onOpen={onOpen} />
+      </section>
+    </div>
+  );
+}
+
 function WelcomeView({
   onOpenRoute,
   shouldShowWelcome,
@@ -259,29 +310,35 @@ function FolderView({ ariaLabel, title, summary, items, onOpen }: FolderViewProp
           {summary ? <p>{summary}</p> : null}
         </div>
       ) : null}
-      <div className="folder-view__grid" role="list" aria-label={ariaLabel}>
-        {items.map((item) => {
-          const project = getProject(item.route.split("/").at(-1) ?? "");
-          return (
-            <div key={item.id} role="listitem">
-              <button
-                className="folder-file"
-                type="button"
-                onClick={() => onOpen(item)}
-                onDoubleClick={() => onOpen(item)}
-              >
-                <span className="folder-file__icon" aria-hidden="true">
-                  <Icon name={getWindowIcon(item.kind)} />
-                </span>
-                <span className="folder-file__name">{item.title}</span>
-                {project ? (
-                  <span className="folder-file__meta">{project.tags.join(" / ")}</span>
-                ) : null}
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      <FolderGrid ariaLabel={ariaLabel} items={items} onOpen={onOpen} />
+    </div>
+  );
+}
+
+function FolderGrid({ ariaLabel, items, onOpen }: FolderViewProps) {
+  return (
+    <div className="folder-view__grid" role="list" aria-label={ariaLabel}>
+      {items.map((item) => {
+        const project = getProject(item.route.split("/").at(-1) ?? "");
+        return (
+          <div key={item.id} role="listitem">
+            <button
+              className="folder-file"
+              type="button"
+              onClick={() => onOpen(item)}
+              onDoubleClick={() => onOpen(item)}
+            >
+              <span className="folder-file__icon" aria-hidden="true">
+                <Icon name={getWindowIcon(item.kind)} />
+              </span>
+              <span className="folder-file__name">{item.title}</span>
+              {project ? (
+                <span className="folder-file__meta">{project.tags.join(" / ")}</span>
+              ) : null}
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }
