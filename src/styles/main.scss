@@ -499,6 +499,27 @@ a {
   }
 }
 
+@media (min-width: 761px) {
+  .start-menu[data-submenu-open="true"] {
+    grid-template-columns: minmax(0, 230px);
+  }
+
+  .start-menu[data-submenu-open="true"] .start-menu__items {
+    border-right: 0;
+  }
+
+  .start-menu__submenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 230px;
+    max-height: none;
+    border-left: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 94%, var(--surface-muted));
+  }
+}
+
 .start-menu__rail {
   display: none;
 
@@ -589,6 +610,7 @@ a {
   min-height: 0;
   max-height: inherit;
   overflow-y: auto;
+  scrollbar-gutter: stable;
   padding: 8px;
 }
 
